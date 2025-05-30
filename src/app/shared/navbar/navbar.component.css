@@ -1,0 +1,72 @@
+/* Thème académique */
+.custom-navbar {
+  background: linear-gradient(to right, #001f3f, #003366);
+  color: white;
+  padding: 0.75rem 1.5rem;
+}
+
+.custom-navbar .navbar-brand {
+  font-weight: bold;
+  color: white;
+  font-size: 1.4rem;
+  transition: transform 0.3s ease;
+}
+
+.custom-navbar .navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+.brand-title {
+  font-family: 'Georgia', serif;
+}
+
+.brand-title .upc {
+  color: #ffd700;
+}
+
+/* Lien animé */
+.custom-link {
+  position: relative;
+  color: #fff !important;
+  transition: color 0.3s;
+}
+
+.custom-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background-color: #ffd700;
+  transition: width 0.3s ease-in-out;
+}
+
+.custom-link:hover::after {
+  width: 100%;
+}
+
+/* Bouton connexion */
+
+.btn-login-upc {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 0 rgba(255, 215, 0, 0);
+  transition: all 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.btn-login-upc:hover {
+  background: rgba(255, 215, 0, 0.1);
+  color: #ffd700;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.4);
+  transform: translateY(-2px);
+}
