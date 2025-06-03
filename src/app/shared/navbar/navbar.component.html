@@ -35,8 +35,8 @@
           </ul>
         </li>
 
-        <!-- Valve Étudiant Dropdown -->
-        <li class="nav-item dropdown">
+        <!-- Visible seulement pour les étudiants -->
+        <li *ngIf="authService.isEtudiant()" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white fw-semibold" role="button" data-bs-toggle="dropdown">
             Valve Étudiant
           </a>
@@ -48,6 +48,24 @@
             <li><a class="dropdown-item" routerLink="/valveetudiants/tp">Travaux Pratiques</a></li>
           </ul>
         </li>
+
+        <!-- Visible seulement pour les enseignants -->
+        <li *ngIf="authService.isEnseignant()" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white fw-semibold" role="button" data-bs-toggle="dropdown">
+            Espace Enseignant
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark text-start animate__animated animate__fadeIn">
+            <li><a class="dropdown-item" routerLink="/enseignant/dashboard">Dashboard</a></li>
+            <li><a class="dropdown-item" routerLink="/enseignant/tp">Publier un TP</a></li>
+            <li><a class="dropdown-item" routerLink="/enseignant/reclamation">Listes des réclamations</a></li>
+          </ul>
+        </li>
+
+        <!-- Visible seulement pour les admins -->
+        <li *ngIf="authService.isAdmin()" class="nav-item">
+          <a class="nav-link text-white fw-semibold" routerLink="admin">Espace Admin</a>
+        </li>
+
 
         <!-- Connexion -->
         <li class="nav-item">

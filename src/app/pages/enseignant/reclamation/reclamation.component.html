@@ -1,1 +1,47 @@
-<p>reclamation works!</p>
+<div class="container mt-5 pt-4">
+  <h3 class="mb-4 text-center">Réclamations des étudiants</h3>
+
+  <div *ngIf="reclamationsFiltrees.length === 0" class="alert alert-info text-center">
+    Aucune réclamation ne vous est destinée.
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col" *ngFor="let rec of reclamationsFiltrees">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ rec.objet }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Cours : {{ rec.cours }}</h6>
+          <p class="card-text">
+            <strong>Type :</strong> {{ rec.type }} <br />
+            <strong>Étudiant :</strong> {{ rec.etudiant.nom }} <br />
+            <strong>Promotion :</strong> {{ rec.etudiant.promotion }} <br />
+            <strong>Date :</strong> {{ rec.date }}
+          </p>
+          <button class="btn btn-outline-primary btn-sm" (click)="ouvrirDetails(rec)">Voir détails</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal détails -->
+  <div *ngIf="reclamationSelectionnee" class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.6);">
+    <div class="modal-dialog">
+      <div class="modal-content shadow">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ reclamationSelectionnee.objet }}</h5>
+          <button type="button" class="btn-close" (click)="fermerDetails()"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Type :</strong> {{ reclamationSelectionnee.type }}</p>
+          <p><strong>Message :</strong> {{ reclamationSelectionnee.message }}</p>
+          <p><strong>Étudiant :</strong> {{ reclamationSelectionnee.etudiant.nom }}</p>
+          <p><strong>Promotion :</strong> {{ reclamationSelectionnee.etudiant.promotion }}</p>
+          <p><strong>Date :</strong> {{ reclamationSelectionnee.date }}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" (click)="fermerDetails()">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

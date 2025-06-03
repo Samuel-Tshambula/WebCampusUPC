@@ -11,10 +11,10 @@ const routes: Routes = [
     component: LayoutEnseignantComponent,
     children: [
       {
-        path: '', redirectTo: 'dashboard/enseignant', pathMatch: 'full'
+        path: '', redirectTo: 'dashboard', pathMatch: 'full'
       },
       {
-        path: 'dashboard/enseignant',
+        path: 'dashboard',
         component : DashboardComponent
       },
       {

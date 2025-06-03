@@ -15,7 +15,7 @@ export class AppComponent {
 
   constructor( private route : Router) {
     this.route.events.subscribe(() => {
-      const hiddenRoutes = ['login', 'valveetudiants/dashboard'];
+      const hiddenRoutes = ['login', 'valveetudiants/dashboard', 'enseignant/dashboard'];
       this.showHeader = !hiddenRoutes.some(route => this.route.url.includes(route));
     })
   }

@@ -1,1 +1,43 @@
-<p>tp works!</p>
+<div class="container mt-4">
+  <h2 class="mb-4">Publier un TP</h2>
+
+  <form [formGroup]="tpForm" (ngSubmit)="submitTP()">
+    <div class="mb-3">
+      <label for="promotion" class="form-label">Promotion</label>
+      <select id="promotion" class="form-select" formControlName="promotion">
+        <option value="">Sélectionner une promotion</option>
+        <option *ngFor="let promo of promotions" [value]="promo">{{ promo }}</option>
+      </select>
+      <div *ngIf="tpForm.get('promotion')?.invalid && tpForm.get('promotion')?.touched" class="text-danger">
+        La promotion est requise.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="titre" class="form-label">Titre</label>
+      <input id="titre" type="text" class="form-control" formControlName="titre">
+      <div *ngIf="tpForm.get('titre')?.invalid && tpForm.get('titre')?.touched" class="text-danger">
+        Le titre est requis (au moins 3 caractères).
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" rows="3" class="form-control" formControlName="description"></textarea>
+      <div *ngIf="tpForm.get('description')?.invalid && tpForm.get('description')?.touched" class="text-danger">
+        La description est requise (au moins 10 caractères).
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="fichier" class="form-label">Fichier TP (facultatif)</label>
+      <input id="fichier" type="file" class="form-control" (change)="onFileSelected($event)">
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="tpForm.invalid">Publier</button>
+  </form>
+
+  <div *ngIf="confirmation" class="alert alert-success mt-3">
+    TP publié avec succès !
+  </div>
+
