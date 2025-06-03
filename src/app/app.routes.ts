@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeComponent } from './pages/home/home.component';
 import { Routes } from '@angular/router';
 
@@ -9,5 +10,25 @@ export const routes: Routes = [
   {
     path: 'infos',
     loadChildren: () => import('./pages/infos/infos.module').then(m => m.InfosModule)
+  },
+  {
+    path: 'valveetudiants',
+    loadChildren: () => import('./pages/valve/valve.module').then(m => m.ValveModule)
+  },
+  {
+    path: 'enseignant',
+    loadChildren: () => import('./pages/enseignant/enseignant.module').then(m => m.EnseignantModule)
+  },
+  {
+    path: 'auth',
+    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) 
+  },
+  {
+    path:'**',
+    component: NotFoundComponent
   }
 ];

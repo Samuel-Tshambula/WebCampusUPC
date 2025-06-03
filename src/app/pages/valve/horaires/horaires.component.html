@@ -1,1 +1,39 @@
-<p>horaires works!</p>
+<div class="container my-5 pt-4">
+  <h2 class="text-center mb-4 fw-bold text-success animate__animated animate__fadeInDown">
+    📅 Horaire de cours - {{ promotion }}
+  </h2>
+
+  <div *ngIf="horaires.length > 0; else noData">
+    <div class="card shadow-sm p-4 border-0 animate__animated animate__fadeInUp">
+      <div class="table-responsive">
+        <table class="table table-striped align-middle">
+          <thead class="table-success">
+            <tr>
+              <th>Jour</th>
+              <th>Heure</th>
+              <th>Cours</th>
+              <th>Professeur</th>
+              <th>Salle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let h of horaires">
+              <td>{{ h.jour }}</td>
+              <td>{{ h.heure }}</td>
+              <td>{{ h.cours }}</td>
+              <td>{{ h.prof }}</td>
+              <td>{{ h.salle }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noData>
+    <div class="alert alert-info text-center mt-4">
+      Aucun horaire disponible pour votre promotion.
+    </div>
+  </ng-template>
+</div>
+

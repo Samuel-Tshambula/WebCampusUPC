@@ -1,1 +1,66 @@
-<p>deliberation works!</p>
+<div class="container my-5 pt-4">
+  <h2 class="text-center mb-4 fw-bold text-primary animate__animated animate__fadeInDown">
+    📊 Délibérations – {{ promotion }}
+  </h2>
+
+  <!-- Barre de recherche -->
+  <div class="row mb-4">
+    <div class="col-md-6 offset-md-3">
+      <input
+        type="text"
+        class="form-control shadow-sm"
+        placeholder="🔍 Rechercher un étudiant par nom..."
+        [(ngModel)]="searchTerm"
+        (input)="rechercherEtudiant()"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="resultatsFiltres.length > 0; else aucuneDelib">
+    <div class="row g-4">
+      <div class="col-lg-6" *ngFor="let etu of resultatsFiltres">
+        <div class="card shadow-sm p-3 animate__animated animate__fadeInUp">
+          <div class="card-header bg-primary text-white">
+            <strong>{{ etu.nom }}</strong> – <small>{{ etu.matricule }}</small>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm align-middle mt-2">
+              <thead>
+                <tr>
+                  <th>UE / Cours</th>
+                  <th>Note</th>
+                  <th>Crédit</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let note of etu.notes">
+                  <td>{{ note.cours }}</td>
+                  <td>{{ note.note }}/20</td>
+                  <td>{{ note.credit }}</td>
+                  <td>
+                    <span
+                      class="badge"
+                      [ngClass]="{
+                        'bg-success': note.note >= 10,
+                        'bg-danger': note.note < 10
+                      }"
+                    >
+                      {{ note.note >= 10 ? 'Validé' : 'Échec' }}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #aucuneDelib>
+    <div class="alert alert-warning text-center mt-4">
+      Aucune délibération disponible pour la promotion {{ promotion }} ou aucun étudiant ne correspond à votre recherche.
+    </div>
+  </ng-template>
+</div>

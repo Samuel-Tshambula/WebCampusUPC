@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlanningComponent } from './planning.component';
+import { LayoutValveComponent } from './layout-valve.component';
 
-describe('PlanningComponent', () => {
-  let component: PlanningComponent;
-  let fixture: ComponentFixture<PlanningComponent>;
+describe('LayoutValveComponent', () => {
+  let component: LayoutValveComponent;
+  let fixture: ComponentFixture<LayoutValveComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PlanningComponent]
+      imports: [LayoutValveComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PlanningComponent);
+    fixture = TestBed.createComponent(LayoutValveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

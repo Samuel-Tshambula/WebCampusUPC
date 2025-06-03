@@ -1,1 +1,59 @@
-<p>contacts works!</p>
+<div class="container my-5 pt-4">
+  <h2 class="text-center fw-bold text-info mb-5 animate__animated animate__fadeInDown">
+    📬 Contactez l'Administration UPC
+  </h2>
+
+  <div class="row justify-content-center g-4">
+    <!-- Colonne Infos -->
+    <div class="col-md-5 animate__animated animate__fadeInLeft">
+      <div class="card p-4 shadow-sm h-100 border-0">
+        <h5 class="fw-semibold mb-3">📌 Informations de contact</h5>
+        <p><i class="bi bi-geo-alt-fill me-2 text-info"></i> 123 Av. Université, Kinshasa, RDC</p>
+        <p><i class="bi bi-envelope-fill me-2 text-info"></i> contact&#64;upc.cd</p>
+        <p><i class="bi bi-telephone-fill me-2 text-info"></i> +243 970 000 000</p>
+        <p><i class="bi bi-clock-fill me-2 text-info"></i> Lundi - Vendredi : 8h à 16h</p>
+      </div>
+    </div>
+
+    <!-- Formulaire de contact -->
+    <div class="col-md-7 animate__animated animate__fadeInRight">
+      <div class="card p-4 shadow-sm border-0">
+        <h5 class="fw-semibold mb-4">✉️ Formulaire de contact</h5>
+        <form (ngSubmit)="envoyerMessage()" #contactForm="ngForm">
+          <div class="mb-3">
+            <label for="nom" class="form-label">Nom complet</label>
+            <input type="text" class="form-control" id="nom" name="nom" [(ngModel)]="contact.nom" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Adresse Email</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="contact.email" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="sujet" class="form-label">Sujet</label>
+            <input type="text" class="form-control" id="sujet" name="sujet" [(ngModel)]="contact.sujet" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea
+              class="form-control"
+              id="message"
+              rows="5"
+              name="message"
+              [(ngModel)]="contact.message"
+              required
+            ></textarea>
+          </div>
+
+          <div class="text-end">
+            <button type="submit" class="btn btn-info text-white" [disabled]="!contactForm.form.valid">
+              <i class="bi bi-send me-1"></i> Envoyer
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
