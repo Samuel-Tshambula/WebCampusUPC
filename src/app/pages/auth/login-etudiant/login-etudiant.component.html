@@ -1,0 +1,38 @@
+<div class="container min-vh-100 d-flex justify-content-center align-items-center bg-light">
+  <div class="col-md-6">
+    <div class="card shadow border-0">
+      <div class="card-body p-4">
+        <h3 class="text-center text-primary mb-4 fw-bold">
+          🎓 Connexion Étudiant
+        </h3>
+
+        <!-- Message d’erreur -->
+        <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'">
+          {{ message }}
+          <button class="btn-close float-end" (click)="closeAlert()"></button>
+        </div>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <!-- Numéro de carte -->
+          <div class="mb-3">
+            <label class="form-label">Numéro de carte étudiant</label>
+            <input type="text" formControlName="cardNumber" class="form-control" placeholder="Ex : UPC001" />
+          </div>
+
+          <!-- Mot de passe -->
+          <div class="mb-3">
+            <label class="form-label">Mot de passe</label>
+            <input type="password" formControlName="password" class="form-control" placeholder="********" />
+          </div>
+
+          <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-primary fw-bold" [disabled]="loginForm.invalid">
+              <i class="bi bi-box-arrow-in-right me-2"></i> Se connecter
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

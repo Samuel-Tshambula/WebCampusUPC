@@ -1,0 +1,62 @@
+<div class="container my-5 pt-4 text-light">
+  <h2 class="text-center mb-5 fw-bold text-success animate__animated animate__fadeInDown">
+    📣 Annonces Officielles UPC
+  </h2>
+
+  <div class="row g-4">
+    <div class="col-12" *ngIf="paginatedAnnonces?.length === 0">
+      <p class="text-center text-muted">Aucune annonce disponible pour le moment.</p>
+    </div>
+
+    <div class="col-md-6 col-lg-4" *ngFor="let annonce of paginatedAnnonces">
+      <div class="card h-100 shadow-sm border-0 animate__animated animate__fadeInUp bg-dark text-light">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold text-success">
+            <i class="bi bi-megaphone-fill me-2"></i>{{ annonce.title }}
+          </h5>
+          <p class="card-text text-white">{{ annonce.description | slice:0:130 }}...</p>
+
+          <div class="mt-auto d-flex justify-content-between flex-wrap gap-2">
+            <a [routerLink]="['view', annonce._id]" class="btn btn-outline-success btn-sm">
+              Détails <i class="bi bi-arrow-right-short"></i>
+            </a>
+
+            <a class="btn btn-outline-primary btn-sm" [routerLink]="['edit', annonce._id]">
+              <i class="bi bi-pencil-fill me-1"></i>Modifier
+            </a>
+
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteAnnonce(annonce._id)">
+              <i class="bi bi-trash-fill me-1"></i>Supprimer
+            </button>
+          </div>
+        </div>
+        <div class="card-footer text-muted small bg-dark border-0">
+          Publiée le {{ annonce.publishedAt | date:'dd/MM/yyyy' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center mt-4" *ngIf="totalPages > 1">
+    <nav>
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link bg-dark text-light border-secondary" (click)="goToPage(currentPage - 1)">
+            Précédent
+          </button>
+        </li>
+        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+          <button class="page-link bg-dark text-light border-secondary" (click)="goToPage(page)">
+            {{ page }}
+          </button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link bg-dark text-light border-secondary" (click)="goToPage(currentPage + 1)">
+            Suivant
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

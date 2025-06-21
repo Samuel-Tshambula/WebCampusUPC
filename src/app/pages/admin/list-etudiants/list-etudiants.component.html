@@ -1,0 +1,44 @@
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-info">👩‍🎓 Liste des Étudiants</h3>
+
+  <input
+  type="text"
+  class="form-control bg-dark text-light mb-4"
+  placeholder="🔍 Rechercher un étudiant..."
+  [(ngModel)]="searchTerm"
+  (ngModelChange)="onSearchChange()"
+/>
+
+  <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close float-end" (click)="closeAlert()"></button>
+  </div>
+
+  <div *ngIf="filteredStudents.length === 0" class="text-center text-muted">
+    Aucun étudiant correspondant à votre recherche.
+  </div>
+
+  <div class="row g-4" *ngIf="filteredStudents.length > 0">
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let student of filteredStudents">
+      <div class="card border border-info text-light shadow-sm" style="background: transparent;">
+        <div class="card-body">
+          <h5 class="fw-bold text-info"><i class="bi bi-person-badge-fill me-2"></i>{{ student.fullName }}</h5>
+          <p><strong>Carte :</strong> {{ student.cardNumber }}</p>
+          <p><strong>Email :</strong> {{ student.email }}</p>
+          <p><strong>Promotion :</strong> {{ student.promotion.nom }}</p>
+          <p><strong>Section :</strong> {{ student.promotion.section.name }}</p>
+          <p><strong>Faculté :</strong> {{ student.promotion.faculty.nom }}</p>
+
+          <div class="d-flex justify-content-between mt-3">
+            <a [routerLink]="['edit', student._id]" class="btn btn-outline-warning btn-sm">
+              <i class="bi bi-pencil-fill me-1"></i> Modifier
+            </a>
+            <button (click)="deleteStudent(student._id)" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-trash-fill me-1"></i> Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

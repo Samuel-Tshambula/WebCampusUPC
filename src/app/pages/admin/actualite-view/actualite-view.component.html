@@ -1,0 +1,33 @@
+<div class="container my-5 px-3 px-md-5">
+  <div class="card shadow-lg border-0 rounded bg-dark text-light overflow-hidden">
+    <div class="row g-0 align-items-center">
+      <!-- Texte à gauche -->
+      <div class="col-12 col-md-7 p-4">
+        <h2 class="fw-bold text-warning mb-3">
+          {{ actualite?.title }}
+        </h2>
+        <p class="text-muted small mb-4">
+          Publié le {{ actualite?.createdAt | date:'dd/MM/yyyy à HH:mm' }}
+        </p>
+        <p class="fs-5 lh-lg">
+          {{ actualite?.description }}
+        </p>
+        <div class="mt-4">
+          <a routerLink="/admin/actualites" class="btn btn-outline-light">
+            <i class="bi bi-arrow-left-circle me-1"></i> Retour
+          </a>
+        </div>
+      </div>
+
+      <!-- Image à droite -->
+      <div class="col-12 col-md-5">
+        <img 
+          [src]="getImageUrl(actualite?.image)" 
+          alt="Image actualité"
+          class="img-fluid h-100 w-100"
+          style="object-fit: cover; min-height: 250px;"
+        />
+      </div>
+    </div>
+  </div>
+</div>

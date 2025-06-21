@@ -1,0 +1,29 @@
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-info">
+    📖 Détail du Cours
+  </h3>
+
+  <div *ngIf="message" class="alert alert-danger" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close float-end" (click)="closeAlert()"></button>
+  </div>
+
+  <div *ngIf="course" class="card border border-info shadow-sm p-4" style="background: transparent;">
+    <h4 class="fw-bold text-info mb-3">
+      <i class="bi bi-journal-text me-2"></i>{{ course.title }}
+    </h4>
+
+    <p class="text-light"><strong>Description :</strong> {{ course.description || 'Aucune' }}</p>
+    <p class="text-light"><strong>Crédits :</strong> {{ course.credits }}</p>
+
+    <hr class="border-info" />
+
+    <p class="text-light"><strong>Promotion :</strong> {{ course.promotion.nom }}</p>
+    <p class="text-light"><strong>Section :</strong> {{ course.promotion.section.name }}</p>
+    <p class="text-light"><strong>Faculté :</strong> {{ course.promotion.faculty.nom }}</p>
+
+    <a routerLink="/admin/cours" class="btn btn-outline-light mt-4">
+      <i class="bi bi-arrow-left"></i> Retour à la liste
+    </a>
+  </div>
+</div>

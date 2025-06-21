@@ -1,0 +1,60 @@
+<div class="container d-flex justify-content-center min-vh-100 text-light">
+  <div class="form-card w-100" data-aos="zoom-in">
+    <h3 class="text-center fw-bold mb-4 text-warning">
+      <i class="bi bi-person-lines-fill me-2"></i>Modifier l'étudiant
+    </h3>
+
+    <!-- Message -->
+    <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'" role="alert">
+      {{ message }}
+      <button (click)="closeAlert()" type="button" class="btn-close float-end" aria-label="Close"></button>
+    </div>
+
+    <!-- Formulaire -->
+    <form [formGroup]="studentForm" (ngSubmit)="submitStudent()">
+      <!-- Nom complet -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Nom complet</label>
+        <input type="text" formControlName="fullName" class="form-control bg-dark text-light" placeholder="Ex: Jean Kabila" />
+      </div>
+
+      <!-- Numéro de carte -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Numéro de carte</label>
+        <input type="text" formControlName="cardNumber" class="form-control bg-dark text-light" placeholder="Ex: UPC001" />
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Adresse Email</label>
+        <input type="email" formControlName="email" class="form-control bg-dark text-light" placeholder="Ex: etudiant@upc.cd" />
+      </div>
+
+      <!-- Promotion -->
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Promotion</label>
+        <select formControlName="promotion" class="form-select bg-dark text-light">
+          <option [value]="''" disabled>-- Sélectionner une promotion --</option>
+          <option *ngFor="let promo of promotions" [value]="promo._id">
+            {{ promo.nom }} - {{ promo.section.name }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Bouton -->
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-warning fw-bold">
+          <i class="bi bi-save2 me-2"></i>Mettre à jour
+        </button>
+      </div>
+    </form>
+
+    <!-- Retour -->
+    <div class="text-center mt-3">
+      <a routerLink="/admin/etudiants" class="btn btn-outline-light">
+        <i class="bi bi-arrow-left me-1"></i>Retour à la liste
+      </a>
+    </div>
+  </div>
+</div>
+

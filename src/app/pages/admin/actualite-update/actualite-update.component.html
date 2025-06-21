@@ -1,0 +1,48 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <h3 class="text-center fw-bold mb-4 text-primary">
+        <i class="bi bi-pencil-square me-2"></i>Modifier une actualité
+      </h3>
+
+      <div *ngIf="isOpen" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ actualite?.message }}
+        <button (click)="close()" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+      <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ actualite?.message }}
+        <button (click)="close()" type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+
+      <form [formGroup]="actualiteForm" (ngSubmit)="edit()" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Titre</label>
+          <input type="text" formControlName="titre" class="form-control" placeholder="Titre de l’actualité" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Description</label>
+          <textarea formControlName="description" rows="4" class="form-control" placeholder="Décrivez ici..."></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Image (laisser vide si inchangée)</label>
+          <input type="file" class="form-control" (change)="onFileSelected($event)" accept="image/*" />
+
+          <!-- Image actuelle -->
+          <div *ngIf="actualite?.image" class="mt-3">
+            <small class="text-muted">Image actuelle :</small><br />
+            <img [src]="'http://localhost:5000' + actualite.image" alt="Image actuelle"
+              class="img-thumbnail mt-2" style="max-width: 200px;" />
+          </div>
+        </div>
+
+        <div class="d-grid">
+          <button type="submit" class="btn btn-warning fw-bold">
+            <i class="bi bi-save me-2"></i>Mettre à jour
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

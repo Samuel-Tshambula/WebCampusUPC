@@ -1,0 +1,55 @@
+<!-- teacher-add.component.html -->
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-primary">
+    👨‍🏫 Inscription d'un professeur
+  </h3>
+
+  <!-- Message d'erreur / succès -->
+  <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'" role="alert">
+    {{ message }}
+    <button (click)="closeAlert()" type="button" class="btn-close float-end"></button>
+  </div>
+
+  <form [formGroup]="teacherForm" (ngSubmit)="submitTeacher()">
+    <!-- Nom complet -->
+    <div class="mb-3">
+      <label class="form-label">Nom complet</label>
+      <input type="text" class="form-control bg-dark text-light" formControlName="fullName" placeholder="Ex: Jean Mavula" />
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label class="form-label">Adresse Email</label>
+      <input type="email" class="form-control bg-dark text-light" formControlName="email" placeholder="Ex: prof@upc.cd" />
+    </div>
+
+    <!-- Téléphone (optionnel) -->
+    <div class="mb-3">
+      <label class="form-label">Téléphone</label>
+      <input type="text" class="form-control bg-dark text-light" formControlName="phone" placeholder="Ex: +243 000000000" />
+    </div>
+
+    <!-- Mot de passe -->
+    <div class="mb-3">
+      <label class="form-label">Mot de passe</label>
+      <input type="password" class="form-control bg-dark text-light" formControlName="password" placeholder="********" />
+    </div>
+
+    <!-- Cours -->
+    <div class="mb-3">
+      <label class="form-label">Cours assignés</label>
+      <select class="form-select bg-dark text-light" formControlName="courses" multiple>
+        <option *ngFor="let course of courses" [value]="course._id">
+          {{ course.title }} ({{ course.promotion.nom }} - {{ course.promotion.section.name }})
+        </option>
+      </select>
+      <small class="text-light">Maintenez Ctrl (ou Cmd sur Mac) pour sélectionner plusieurs cours</small>
+    </div>
+
+    <div class="d-grid mt-4">
+      <button type="submit" class="btn btn-primary fw-bold">
+        <i class="bi bi-save2 me-2"></i>Enregistrer le professeur
+      </button>
+    </div>
+  </form>
+</div>

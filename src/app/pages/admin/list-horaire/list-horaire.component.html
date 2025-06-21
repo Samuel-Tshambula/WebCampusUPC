@@ -1,0 +1,38 @@
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-info">🗓️ Horaire de la semaine</h3>
+
+  <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'">
+    {{ message }}
+    <button class="btn-close float-end" (click)="closeAlert()"></button>
+  </div>
+
+  <div *ngIf="filteredHoraires.length === 0 && !isError" class="text-center text-light">
+    Aucun horaire trouvé pour cette promotion.
+  </div>
+
+  <div *ngFor="let day of ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi']" class="mb-4">
+    <h5 class="fw-bold text-primary">{{ day }}</h5>
+
+    <div *ngIf="hasCoursesForDay(day); else noData">
+      <div class="card bg-dark text-light border border-info mb-2" *ngFor="let h of groupedByDay[day]">
+        <div class="card-body">
+          <strong>{{ h.cours.title }}</strong> — {{ h.heure_debut }} à {{ h.heure_fin }}<br />
+          Salle : {{ h.salle }}
+
+          <div class="d-flex justify-content-end gap-2 mt-3">
+            <a [routerLink]="['/admin/horaires/edit', h._id]" class="btn btn-outline-warning btn-sm">
+              <i class="bi bi-pencil-square me-1"></i> Modifier
+            </a>
+            <button (click)="deleteHoraire(h._id)" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-trash-fill me-1"></i> Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <p class="text-light">Aucun cours prévu ce jour-là.</p>
+    </ng-template>
+  </div>
+</div>

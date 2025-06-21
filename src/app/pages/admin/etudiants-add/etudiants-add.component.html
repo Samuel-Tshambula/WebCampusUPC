@@ -1,0 +1,50 @@
+<!-- inscription-etudiant.component.html -->
+<div class="container d-flex justify-content-center min-vh-100 text-light">
+  <div class="form-card w-100" data-aos="zoom-in">
+    <h3 class="text-center fw-bold mb-4 text-primary">
+      <i class="bi bi-person-plus-fill me-2"></i>Inscription d'un étudiant
+    </h3>
+
+    <!-- Messages -->
+    <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'" role="alert">
+      {{ message }}
+      <button (click)="closeAlert()" type="button" class="btn-close float-end"></button>
+    </div>
+
+    <form [formGroup]="studentForm" (submit)="submitStudent()">
+      <div class="mb-3">
+        <label class="form-label">Nom complet</label>
+        <input type="text" class="form-control" formControlName="fullName" placeholder="Nom complet"/>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Numéro de carte</label>
+        <input type="text" class="form-control" formControlName="cardNumber" placeholder="Ex : UPC001"/>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" formControlName="email" placeholder="Email"/>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Mot de passe</label>
+        <input type="password" class="form-control" formControlName="password" placeholder="Mot de passe"/>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Promotion</label>
+        <select class="form-select" formControlName="promotion">
+          <option value="" disabled selected>-- Choisir une promotion --</option>
+          <option *ngFor="let promo of promotions" [value]="promo._id">{{ promo.nom }} - {{ promo.section.name }}</option>
+        </select>
+      </div>
+
+      <div class="d-grid">
+        <button class="btn btn-primary fw-bold" type="submit">
+          <i class="bi bi-check-circle me-2"></i>Inscrire
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

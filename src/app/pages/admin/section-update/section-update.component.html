@@ -1,0 +1,33 @@
+<div class="container d-flex justify-content-center min-vh-100">
+  <div class="form-card w-100" data-aos="zoom-in">
+    <h3 class="text-center fw-bold mb-4 text-primary">
+      <i class="bi bi-pencil-square me-2"></i>Modifier la section
+    </h3>
+
+    <!-- Message succès -->
+    <div *ngIf="isOpen" class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button (click)="close()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <!-- Message erreur -->
+    <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button (click)="close()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <form [formGroup]="sectionForm" (ngSubmit)="submitUpdateSection()">
+      <div class="mb-3" data-aos="fade-right">
+        <label class="form-label fw-semibold">Nom de la section</label>
+        <input type="text" formControlName="name" class="form-control" placeholder="Nom de la section" />
+      </div>
+
+      <div class="d-grid" data-aos="fade-up">
+        <button type="submit" class="btn btn-primary fw-bold">
+          <i class="bi bi-save2 me-2"></i>Mettre à jour
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

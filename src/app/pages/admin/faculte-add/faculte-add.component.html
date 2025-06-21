@@ -1,0 +1,29 @@
+<div class="container d-flex justify-content-center min-vh-100">
+    <div class="form-card w-100" data-aos="zoom-in">
+      <h3 class="text-center fw-bold mb-4 text-primary">
+        <i class="bi bi-person-plus-fill me-2"></i>Ajouter une faculté
+      </h3>
+        <div *ngIf="isOpen" class="alert alert-success alert-dismissible fade show" role="alert">
+          {{faculte?.message}}
+          <button (click)="close()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{faculte?.message}}
+          <button (click)="close()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <form [formGroup]="faculteForm" (submit)="submitfaculte()">
+        <div class="mb-3" data-aos="fade-right">
+          <label class="form-label fw-semibold">Nom de la faculté</label>
+          <input type="text" formControlName="name" class="form-control" placeholder="Ex : Sciences informatiques"/>
+        </div>
+        <div class="d-grid" data-aos="fade-up">
+          <button type="submit" class="btn btn-primary fw-bold">
+            <i class="bi bi-save2 me-2"></i>Enregistrer faculté
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+

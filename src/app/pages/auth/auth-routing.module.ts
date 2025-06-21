@@ -1,6 +1,6 @@
+import { LoginEtudiantComponent } from './login-etudiant/login-etudiant.component';
+import { LoginEnseignantComponent } from './login-enseignant/login-enseignant.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterEnseignantComponent } from './register-enseignant/register-enseignant.component';
-import { RegisterEtudiantComponent } from './register-etudiant/register-etudiant.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -10,12 +10,12 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'register/etudiant',
-    component: RegisterEtudiantComponent
+    path: 'login/enseignant',
+    component: LoginEnseignantComponent
   },
   {
-    path: 'register/enseignant',
-    component: RegisterEnseignantComponent
+    path: 'login/etudiant',
+    component : LoginEtudiantComponent
   }
 ];
 

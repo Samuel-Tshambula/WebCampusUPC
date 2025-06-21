@@ -1,3 +1,5 @@
+import { authAdminGuard } from './core/guards/auth-admin.guard';
+import { LoginAdminComponent } from './pages/auth/login-admin/login-admin.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { HomeComponent } from './pages/home/home.component';
 import { Routes } from '@angular/router';
@@ -25,7 +27,12 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule) 
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [authAdminGuard] 
+  },
+  {
+    path: 'adm/lgad',
+    component: LoginAdminComponent
   },
   {
     path:'**',

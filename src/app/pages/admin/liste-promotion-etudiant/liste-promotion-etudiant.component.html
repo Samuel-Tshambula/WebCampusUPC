@@ -1,0 +1,45 @@
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-info">🎓 Étudiants de la promotion</h3>
+
+  <!-- Champ de recherche -->
+<div class="mb-4">
+  <input
+    type="text"
+    class="form-control bg-dark text-light border-info"
+    placeholder="🔍 Rechercher un étudiant par nom ou email"
+    [(ngModel)]="searchTerm"
+  />
+</div>
+
+  <!-- Message -->
+  <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'">
+    {{ message }}
+    <button class="btn-close float-end" (click)="closeAlert()"></button>
+  </div>
+
+  <!-- Liste vide -->
+  <div *ngIf="students.length === 0 && !isError" class="text-center text-muted">
+    Aucun étudiant trouvé pour cette promotion.
+  </div>
+  
+  <!-- Liste des étudiants -->
+  <div class="row g-3" *ngIf="filteredStudents.length > 0">
+    <div class="col-md-6 col-lg-4" *ngFor="let student of filteredStudents">
+      <div class="card border border-info bg-dark text-light h-100 shadow">
+        <div class="card-body">
+          <h5 class="card-title text-info fw-bold">
+            <i class="bi bi-person-fill me-2"></i> {{ student.fullName }}
+          </h5> 
+          <p><strong>Carte :</strong> {{ student.cardNumber }}</p>
+          <p><strong>Email :</strong> {{ student.email }}</p>
+          <p>
+            <strong>Promotion :</strong> {{ student.promotion.nom }}<br />
+            <strong>Section :</strong> {{ student.promotion.section.name }}<br />
+            <strong>Faculté :</strong> {{ student.promotion.faculty.nom }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

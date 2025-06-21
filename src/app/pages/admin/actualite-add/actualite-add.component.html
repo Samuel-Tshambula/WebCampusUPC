@@ -1,0 +1,39 @@
+<div class="container d-flex justify-content-center min-vh-100">
+  <div class="form-card w-100" data-aos="zoom-in">
+    <h3 class="text-center fw-bold mb-4 text-primary">
+      <i class="bi bi-newspaper me-2"></i>Ajouter une actualité
+    </h3>
+
+    <div *ngIf="isOpen" class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ actualite?.message }}
+      <button (click)="close()" type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+    <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ actualite?.message }}
+      <button (click)="close()" type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+
+    <form [formGroup]="actuForm" (ngSubmit)="submitActualite()" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Titre</label>
+        <input type="text" formControlName="titre" class="form-control" placeholder="Titre de l’actualité" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Description</label>
+        <textarea formControlName="description" rows="4" class="form-control" placeholder="Décrivez ici..."></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Image</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event)" accept="image/*" />
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary fw-bold" [disabled]="actuForm.invalid || !selectedImage">
+          <i class="bi bi-upload me-2"></i>Publier
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-primary">
+    ✏️ Modifier un professeur
+  </h3>
+
+  <!-- Message d'alerte -->
+  <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'">
+    {{ message }}
+    <button class="btn-close float-end" (click)="closeAlert()"></button>
+  </div>
+
+  <form [formGroup]="teacherForm" (ngSubmit)="submitTeacher()">
+    <!-- Nom complet -->
+    <div class="mb-3">
+      <label class="form-label">Nom complet</label>
+      <input type="text" class="form-control bg-dark text-light" formControlName="fullName" />
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input type="email" class="form-control bg-dark text-light" formControlName="email" />
+    </div>
+
+    <!-- Téléphone -->
+    <div class="mb-3">
+      <label class="form-label">Téléphone</label>
+      <input type="text" class="form-control bg-dark text-light" formControlName="phone" />
+    </div>
+
+    <!-- Cours assignés -->
+    <div class="mb-3">
+      <label class="form-label">Cours assignés</label>
+      <select class="form-select bg-dark text-light" formControlName="courses" multiple>
+        <option *ngFor="let course of courses" [value]="course._id">
+          {{ course.title }} ({{ course.promotion.nom }} - {{ course.promotion.section.name }})
+        </option>
+      </select>
+    </div>
+
+    <div class="d-grid mt-4">
+      <button type="submit" class="btn btn-primary fw-bold">
+        <i class="bi bi-save2 me-2"></i> Mettre à jour
+      </button>
+    </div>
+  </form>
+</div>

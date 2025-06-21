@@ -1,0 +1,36 @@
+<div class="container d-flex justify-content-center min-vh-100">
+    <div class="form-card w-100" data-aos="zoom-in">
+      <h3 class="text-center fw-bold mb-4 text-primary">
+        <i class="bi bi-person-plus-fill me-2"></i>Ajouter une section
+      </h3>
+        <div *ngIf="isOpen" class="alert alert-success alert-dismissible fade show" role="alert">
+          {{message}}
+          <button (click)="close()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{message}}
+          <button (click)="close()" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <form [formGroup]="annonceForm" (submit)="submitAnnonce()">
+        <div class="mb-3" data-aos="fade-right">
+          <label class="form-label fw-semibold">Titre de l'annonce</label>
+          <input type="text" formControlName="title" class="form-control" placeholder="Titre de l'annonce"/>
+        </div>
+        <div class="mb-3" data-aos="fade-right">
+         <label class="form-label fw-semibold">Description</label>
+          <textarea formControlName="description" rows="4" class="form-control" placeholder="Décrivez ici..."></textarea>
+        </div>
+
+        <div class="d-grid" data-aos="fade-up">
+          <button type="submit" class="btn btn-primary fw-bold">
+            <i class="bi bi-save2 me-2"></i>Enregistrer annonce
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+
+

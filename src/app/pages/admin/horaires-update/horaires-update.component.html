@@ -1,0 +1,54 @@
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-warning">✏️ Modifier un horaire</h3>
+
+  <!-- Message d’alerte -->
+  <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'">
+    {{ message }}
+    <button class="btn-close float-end" (click)="closeAlert()"></button>
+  </div>
+
+  <form [formGroup]="horaireForm" (ngSubmit)="submitForm()">
+    <!-- Jour -->
+    <div class="mb-3">
+      <label class="form-label">Jour</label>
+      <select class="form-select bg-dark text-light" formControlName="jour">
+        <option *ngFor="let j of jours" [value]="j">{{ j }}</option>
+      </select>
+    </div>
+
+    <!-- Heure de début -->
+    <div class="mb-3">
+      <label class="form-label">Heure de début</label>
+      <input type="time" class="form-control bg-dark text-light" formControlName="heure_debut" />
+    </div>
+
+    <!-- Heure de fin -->
+    <div class="mb-3">
+      <label class="form-label">Heure de fin</label>
+      <input type="time" class="form-control bg-dark text-light" formControlName="heure_fin" />
+    </div>
+
+    <!-- Salle -->
+    <div class="mb-3">
+      <label class="form-label">Salle</label>
+      <input type="text" class="form-control bg-dark text-light" formControlName="salle" />
+    </div>
+
+    <!-- Cours -->
+    <div class="mb-3">
+      <label class="form-label">Cours associé</label>
+      <select class="form-select bg-dark text-light" formControlName="cours">
+        <option *ngFor="let course of courses" [value]="course._id">
+          {{ course.title }} ({{ course.promotion.nom }} - {{ course.promotion.section.name }})
+        </option>
+      </select>
+    </div>
+
+    <div class="d-grid mt-4">
+      <button type="submit" class="btn btn-warning fw-bold">
+        <i class="bi bi-pencil-square me-2"></i>Modifier l'horaire
+      </button>
+    </div>
+  </form>
+</div>
+

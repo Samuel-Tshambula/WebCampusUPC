@@ -1,1 +1,102 @@
-<p>layout-admin works!</p>
+<div class="dark-theme">
+  <div class="d-flex flex-column min-vh-100">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">
+        <i class="bi bi-speedometer2 me-2"></i>Admin WebCampus
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="adminNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link fw-semibold" href="#"><i class="bi bi-person-circle"></i> Admin</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-light ms-2" (click)="deconnexion()"><i class="bi bi-box-arrow-right"></i> Déconnexion</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main layout -->
+  <div class="d-flex flex-grow-1 overflow-hidden" style="min-height: 0;">
+    <!-- Sidebar -->
+    <nav class="bg-light border-end p-3 d-none d-md-block" style="width: 250px;">
+      <h5 class="text-primary fw-bold mb-4"><i class="bi bi-grid-1x2-fill"></i> Menu</h5>
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a routerLink="/" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-megaphone-fill me-2"></i>Dashboard
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="annonces" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-megaphone-fill me-2"></i>Annonces
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="actualites" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-megaphone-fill me-2"></i>Actualités
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="/admin/deliberations" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-bar-chart-fill me-2"></i>Délibérations
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="enseignants" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-person-lines-fill me-2"></i>Enseignants
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="etudiants" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-person-lines-fill me-2"></i>Etudiants
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="/admin/horaires" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-calendar-week-fill me-2"></i>Horaires
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="promotion" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-mortarboard-fill me-2"></i>Promotions
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="facultes" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-mortarboard-fill me-2"></i>Facultés
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="sections" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-mortarboard-fill me-2"></i>Section
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a routerLink="cours" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-calendar-week-fill me-2"></i>Cours
+          </a>
+        </li> 
+        <li class="nav-item mb-2">
+          <a routerLink="tp" routerLinkActive="active" class="nav-link">
+            <i class="bi bi-calendar-week-fill me-2"></i>TPs
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main content -->
+      <main class="flex-grow-1 overflow-auto">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</div>
+

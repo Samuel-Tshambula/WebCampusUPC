@@ -1,0 +1,50 @@
+<!-- cours-add.component.html -->
+<div class="container d-flex justify-content-center min-vh-100">
+  <div class="form-card w-100" data-aos="zoom-in">
+    <h3 class="text-center fw-bold mb-4 text-primary">
+      <i class="bi bi-journal-plus me-2"></i>Ajouter un cours
+    </h3>
+
+    <div *ngIf="isOpen" class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button (click)="close()" type="button" class="btn-close"></button>
+    </div>
+
+    <div *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button (click)="close()" type="button" class="btn-close"></button>
+    </div>
+
+    <form [formGroup]="courseForm" (ngSubmit)="submitCourse()">
+      <div class="mb-3" data-aos="fade-right">
+        <label class="form-label fw-semibold">Titre du cours</label>
+        <input type="text" class="form-control" formControlName="title" placeholder="Ex : Programmation Web" />
+      </div>
+
+      <div class="mb-3" data-aos="fade-right">
+        <label class="form-label fw-semibold">Description</label>
+        <textarea class="form-control" formControlName="description" placeholder="Description du cours..." rows="3"></textarea>
+      </div>
+
+      <div class="mb-3" data-aos="fade-right">
+        <label class="form-label fw-semibold">Crédit</label>
+        <input type="number" class="form-control" formControlName="credits" min="1" />
+      </div>
+
+      <div class="mb-3" data-aos="fade-right">
+        <label class="form-label fw-semibold">Promotion</label>
+        <select class="form-select" formControlName="promotion">
+          <option disabled selected value="">-- Choisir une promotion --</option>
+          <option *ngFor="let p of promotions" [value]="p._id">{{ p.nom }}-{{p.section.name}}</option>
+        </select>
+      </div>
+
+      <div class="d-grid" data-aos="fade-up">
+        <button type="submit" class="btn btn-primary fw-bold">
+          <i class="bi bi-save2 me-2"></i>Enregistrer le cours
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

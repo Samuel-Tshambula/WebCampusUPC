@@ -17,7 +17,7 @@ export class TPComponent {
       enseignant: 'M. MUKENDI',
       description: 'Créer un mini-site avec HTML/CSS.',
       date: '2025-06-01',
-      dateLimite: '2025-06-06'
+      dateLimite: '2025-06-15'
     },
     {
       id: 2,

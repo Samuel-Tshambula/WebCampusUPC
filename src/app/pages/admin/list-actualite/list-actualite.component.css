@@ -1,0 +1,21 @@
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.15);
+  }
+}
+
+.card-title {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.card-text {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.card-footer {
+  background-color: transparent;
+  border-top: none;
+}

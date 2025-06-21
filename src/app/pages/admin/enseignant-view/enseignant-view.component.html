@@ -1,0 +1,47 @@
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-info">📘 Détails du professeur</h3>
+
+  <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'">
+    {{ message }}
+    <button class="btn-close float-end" (click)="closeAlert()"></button>
+  </div>
+
+  <div *ngIf="teacher" class="card bg-dark border border-info shadow p-4">
+    <h4 class="text-warning fw-bold">
+      <i class="bi bi-person-fill me-2"></i>{{ teacher.fullName }}
+    </h4>
+    <p class="text-light"><strong>Email :</strong> {{ teacher.email }}</p>
+    <p class="text-light"><strong>Téléphone :</strong> {{ teacher.phone || 'N/A' }}</p>
+
+    <hr class="border-info">
+
+    <div *ngIf="teacher.courses.length > 0">
+      <h5 class="text-info mb-3">📚 Cours donnés :</h5>
+      <div class="row">
+        <div class="col-md-6 mb-3" *ngFor="let course of teacher.courses">
+          <div class="card bg-secondary border border-light h-100">
+            <div class="card-body">
+              <h6 class="fw-bold">{{ course.title }}</h6>
+              <p class="mb-1"><strong>Description :</strong> {{ course.description || 'N/A' }}</p>
+              <p class="mb-1"><strong>Crédits :</strong> {{ course.credits }}</p>
+              <p class="mb-1"><strong>Promotion :</strong> {{ course.promotion.nom }}</p>
+              <p class="mb-1"><strong>Section :</strong> {{ course.promotion.section.name }}</p>
+              <p class="mb-1"><strong>Faculté :</strong> {{ course.promotion.faculty.nom }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="teacher.courses.length === 0" class="text-muted">
+      Aucun cours assigné pour le moment.
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <a routerLink="/admin/enseignants" class="btn btn-outline-light">
+      <i class="bi bi-arrow-left me-2"></i>Retour à la liste
+    </a>
+  </div>
+</div>
+

@@ -12,11 +12,17 @@ import { NavbarComponent } from "./shared/navbar/navbar.component";
 })
 export class AppComponent {
   showHeader: boolean = true;
+  showFooter: boolean = true;
 
   constructor( private route : Router) {
     this.route.events.subscribe(() => {
-      const hiddenRoutes = ['login', 'valveetudiants/dashboard', 'enseignant/dashboard'];
+      const hiddenRoutes = ['admin', 'adm'];
       this.showHeader = !hiddenRoutes.some(route => this.route.url.includes(route));
+    })
+
+    this.route.events.subscribe(() => {
+      const hiddenFooterRoutes = ['login', 'valveetudiants/dashboard', 'enseignant/dashboard', 'admin', 'adm'];
+      this.showFooter = !hiddenFooterRoutes.some(routes => this.route.url.includes(routes));
     })
   }
 }

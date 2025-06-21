@@ -1,0 +1,27 @@
+<div class="card shadow border-0 bg-dark text-white rounded-4">
+  <div class="card-header rounded-top-4 px-3">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link"
+          [ngClass]="ongletActif === 'liste' ? 'active-tab' : 'text-white'"
+          (click)="afficherListe()"
+          href="javascript:void(0)">
+          Tous les étudiants
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"
+          [ngClass]="ongletActif === 'inscription' ? 'active-tab' : 'text-white'"
+          (click)="afficherFormulaire()"
+          href="javascript:void(0)">
+          Inscription étudiant
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-body bg-dark p-4 rounded-bottom-4">
+    <app-list-etudiants *ngIf="ongletActif === 'liste'"></app-list-etudiants>
+    <app-etudiants-add *ngIf="ongletActif === 'inscription'"></app-etudiants-add>
+  </div>
+</div>

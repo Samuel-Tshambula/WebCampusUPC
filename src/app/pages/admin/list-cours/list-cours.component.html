@@ -1,0 +1,49 @@
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-success">
+    📚 Liste des Cours
+  </h3>
+
+  <!-- Message -->
+  <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close float-end" (click)="closeAlert()"></button>
+  </div>
+
+  <!-- Aucun cours -->
+  <div *ngIf="courses.length === 0" class="text-center text-muted">
+    Aucun cours disponible pour le moment.
+  </div>
+
+  <!-- Liste -->
+  <div class="row g-4" *ngIf="courses.length > 0">
+    <div class="col-12 col-md-6 col-lg-4" *ngFor="let course of courses">
+      <div class="card shadow-sm h-100 border border-secondary text-light" style="background: transparent;">
+        <div class="card-body d-flex flex-column justify-content-between">
+          <div>
+            <h5 class="card-title fw-bold text-success">
+              <i class="bi bi-book-fill me-2"></i>{{ course.title }}
+            </h5>
+            <p class="mb-2"><strong>Crédits :</strong> {{ course.credits }}</p>
+            <p class="mb-2"><strong>Description :</strong> {{ course.description || '—' }}</p>
+            <p class="mb-2"><strong>Promotion :</strong> {{ course.promotion.nom }}-{{course.promotion.section.name}}</p>
+          </div>
+
+          <div class="mt-3 d-flex flex-column gap-2">
+            <a [routerLink]="['edit', course._id]" class="btn btn-outline-primary btn-sm">
+              <i class="bi bi-pencil-fill me-1"></i> Modifier
+            </a>
+
+            <a [routerLink]="['view', course._id]" class="btn btn-outline-success btn-sm">
+              <i class="bi bi-eye-fill me-1"></i> Voir cours
+            </a>
+
+            <button (click)="deleteCourse(course._id)" class="btn btn-outline-danger btn-sm">
+              <i class="bi bi-trash-fill me-1"></i> Supprimer
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

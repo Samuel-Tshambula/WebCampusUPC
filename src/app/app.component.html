@@ -5,10 +5,12 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<app-navbar></app-navbar>
+ <div *ngIf="showHeader">
+   <app-navbar></app-navbar>
+ </div>
 <main class="d-flex flex-column min-vh-100">
   <router-outlet></router-outlet>
 </main>
-<div *ngIf="showHeader">
+<div *ngIf="showFooter">
   <app-footer></app-footer>
 </div>
