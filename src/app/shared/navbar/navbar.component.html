@@ -3,7 +3,7 @@
     <!-- Logo et Titre -->
     <a class="navbar-brand d-flex align-items-center gap-2" routerLink="/">
       <img
-        src="https://img.freepik.com/vecteurs-premium/logo-universite_20448-237.jpg"
+        src="https://upc.ac.cd/wp-content/uploads/2020/07/UPClogo-445x286.jpg"
         alt="Logo"
         width="40"
         class="img-fluid rounded-circle shadow-sm"
@@ -36,13 +36,12 @@
         </li>
 
         <!-- Visible seulement pour les étudiants -->
-        <li *ngIf="authService.isEtudiant()" class="nav-item dropdown">
+        <li *ngIf="(role$ | async) === 'student'" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white fw-semibold" role="button" data-bs-toggle="dropdown">
             Valve Étudiant
           </a>
           <ul class="dropdown-menu dropdown-menu-dark text-start animate__animated animate__fadeIn">
             <li><a class="dropdown-item" routerLink="/valveetudiants/horaires">Horaires</a></li>
-            <li><a class="dropdown-item" routerLink="/valveetudiants/dashboard">Dashboard</a></li>
             <li><a class="dropdown-item" routerLink="/valveetudiants/deliberation">Délibération</a></li>
             <li><a class="dropdown-item" routerLink="/valveetudiants/reclamation">Réclamation</a></li>
             <li><a class="dropdown-item" routerLink="/valveetudiants/tp">Travaux Pratiques</a></li>
@@ -50,7 +49,7 @@
         </li>
 
         <!-- Visible seulement pour les enseignants -->
-        <li *ngIf="authService.isEnseignant()" class="nav-item dropdown">
+        <li *ngIf="(role$ | async) === 'teacher'" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white fw-semibold" role="button" data-bs-toggle="dropdown">
             Espace Enseignant
           </a>
@@ -62,10 +61,16 @@
         </li>
 
         <!-- Connexion -->
-        <li class="nav-item">
+        <li *ngIf="(role$ | async) === ''" class="nav-item">
           <a class="btn btn-outline-light btn-sm px-3" routerLink="/auth/login">
             Connexion <i class="bi bi-box-arrow-in-right ms-1"></i>
           </a>
+        </li> 
+
+        <li *ngIf="(role$ | async) !== ''" class="nav-item">
+          <button class="btn btn-outline-danger btn-sm px-3" (click)="logout()">
+            Déconnexion <i class="bi bi-box-arrow-right ms-1"></i>
+          </button>
         </li>
       </ul>
     </div>

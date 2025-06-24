@@ -1,0 +1,25 @@
+<!-- promotion-deliberation.component.html -->
+<div class="container my-5 text-light">
+  <h3 class="text-center mb-4 text-warning fw-bold">🎓 Sélectionner une Promotion afin de voir la délibération</h3>
+
+  <div *ngIf="message" class="alert alert-danger">
+    {{ message }}
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let promo of promotions">
+      <div class="card bg-dark border-warning h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-warning">{{ promo.nom }}</h5>
+          <p class="card-text text-light">
+            Section : {{ promo.section?.name }}<br>
+            Faculté : {{ promo.faculty?.nom }}
+          </p>
+          <button (click)="goToDeliberation(promo._id)" class="btn btn-warning w-100">
+            Voir les délibérations
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,120 +1,37 @@
-<div class="container my-5">
-  <!-- Header -->
-  <div class="mb-5 text-center">
-    <h2 class="fw-bold text-primary mb-1">
-      <i class="bi bi-person-workspace me-2"></i>Espace Enseignant
-    </h2>
-    <p class="text-muted">Tableau de bord personnel et activités pédagogiques</p>
-  </div>
+<div class="container py-5 mt-5">
+  <h2 class="mb-4 text-primary">👨‍🏫 Tableau de bord enseignant</h2>
 
-  <!-- Section 1: Profil / Cours / Réclamations -->
-  <div class="row g-4">
-    <!-- Profil -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm border-0 rounded-4 h-100">
-        <div class="card-body">
-          <div class="d-flex align-items-center mb-3">
-            <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-3 me-3">
-              <i class="bi bi-person-fill fs-4"></i>
-            </div>
-            <h5 class="mb-0 fw-semibold">Profil</h5>
-          </div>
-          <p><strong>Nom :</strong> {{ enseignant.nom }}</p>
-          <p><strong>Email :</strong> {{ enseignant.email }}</p>
-          <p><strong>Total Cours :</strong> {{ enseignant.cours.length }}</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Cours enseignés -->
-    <div class="col-md-6 col-lg-4">
-      <div class="card shadow-sm border-0 rounded-4 h-100">
-        <div class="card-body">
-          <div class="d-flex align-items-center mb-3">
-            <div class="bg-success bg-opacity-10 text-success rounded-circle p-3 me-3">
-              <i class="bi bi-journal-richtext fs-4"></i>
-            </div>
-            <h5 class="mb-0 fw-semibold">Cours enseignés</h5>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li *ngFor="let cours of enseignant.cours" class="list-group-item px-0 border-0">
-              <strong>{{ cours.nom }}</strong><br>
-              <small class="text-muted">Promotions : {{ cours.promotions.join(', ') }}</small>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Réclamations -->
-    <div class="col-md-12 col-lg-4">
-      <div class="card shadow-sm border-0 rounded-4 h-100">
-        <div class="card-body">
-          <div class="d-flex align-items-center mb-3">
-            <div class="bg-danger bg-opacity-10 text-danger rounded-circle p-3 me-3">
-              <i class="bi bi-exclamation-triangle-fill fs-4"></i>
-            </div>
-            <h5 class="mb-0 fw-semibold">Réclamations</h5>
-          </div>
-          <p><strong>Total :</strong> {{ nombreReclamations }}</p>
-          <a routerLink="/enseignant/reclamations" class="btn btn-outline-danger btn-sm">
-            Gérer les réclamations
-          </a>
-        </div>
-      </div>
+  <!-- Profil -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">Profil</h5>
+      <p><strong>Nom :</strong> {{ profile?.fullName }}</p>
+      <p><strong>Email :</strong> {{ profile?.email }}</p>
+      <p><strong>Total des cours :</strong> {{ profile?.totalCourses }}</p>
     </div>
   </div>
 
-  <!-- Section 2: Réclamations non lues & Annonces -->
-  <div class="row mt-5 g-4">
-    <!-- Réclamations non lues -->
-    <div class="col-md-6">
-      <div class="card shadow-sm border-0 rounded-4 h-100">
-        <div class="card-body">
-          <div class="d-flex align-items-center mb-3">
-            <div class="bg-warning bg-opacity-10 text-warning rounded-circle p-3 me-3">
-              <i class="bi bi-envelope-exclamation fs-4"></i>
-            </div>
-            <h5 class="mb-0 fw-semibold">Réclamations non lues</h5>
-          </div>
-          <div *ngIf="reclamationsNonLues.length === 0" class="text-muted fst-italic">
-            Aucune réclamation non lue.
-          </div>
-          <ul class="list-group" *ngIf="reclamationsNonLues.length > 0">
-            <li *ngFor="let rec of reclamationsNonLues" class="list-group-item border-start border-3 border-warning d-flex justify-content-between align-items-start">
-              <div>
-                <strong>{{ rec.objet }}</strong><br>
-                <small class="text-muted">{{ rec.etudiant }} - {{ rec.promotion }}</small>
-              </div>
-              <i class="bi bi-chevron-right text-secondary"></i>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <!-- Cours -->
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">Cours enseignés</h5>
+      <ul *ngIf="courses.length > 0; else aucunCours" class="list-group">
+        <li *ngFor="let course of courses" class="list-group-item">
+          <strong>{{ course.title }}</strong> — {{ course.description }} <br />
+          <small class="text-muted">Crédits : {{ course.credits }}</small>
+        </li>
+      </ul>
+      <ng-template #aucunCours>
+        <p class="text-muted">Aucun cours renseigné.</p>
+      </ng-template>
     </div>
+  </div>
 
-    <!-- Annonces internes -->
-    <div class="col-md-6">
-      <div class="card shadow-sm border-0 rounded-4 h-100">
-        <div class="card-body">
-          <div class="d-flex align-items-center mb-3">
-            <div class="bg-info bg-opacity-10 text-info rounded-circle p-3 me-3">
-              <i class="bi bi-megaphone-fill fs-4"></i>
-            </div>
-            <h5 class="mb-0 fw-semibold">Annonces internes</h5>
-          </div>
-          <div *ngIf="annonces.length === 0" class="text-muted fst-italic">
-            Aucune annonce disponible.
-          </div>
-          <ul class="list-group list-group-flush" *ngIf="annonces.length > 0">
-            <li *ngFor="let annonce of annonces" class="list-group-item px-0">
-              <strong>{{ annonce.titre }}</strong>
-              <p class="mb-1 text-muted small">{{ annonce.date }}</p>
-              <p>{{ annonce.message }}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
+  <!-- Réclamations -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="card-title">Réclamations</h5>
+      <p><strong>Nombre total :</strong> {{ totalReclamations }}</p>
     </div>
   </div>
 </div>

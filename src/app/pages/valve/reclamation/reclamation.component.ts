@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { ReclamationService } from './../../../core/services/reclamation.service';
+import { AuthAdminService } from './../../../core/services/auth-admin.service';
+import { Component, inject } from '@angular/core';
 import { FormsModule, FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -9,29 +11,44 @@ import { CommonModule } from '@angular/common';
   styleUrl: './reclamation.component.css'
 })
 export class ReclamationComponent {
+  private reclamationService: ReclamationService = inject(ReclamationService);
+  private enseignantService: AuthAdminService = inject(AuthAdminService);
+
+  enseignants: any[] = [];
   confirmation = false;
 
-  constructor() {}
+  reclamationForm = new FormGroup({
+    type: new FormControl('', Validators.required),
+    subject: new FormControl('', Validators.required),
+    message: new FormControl('', Validators.required),
+    teacher: new FormControl('', Validators.required),
+  });
 
-    reclamationForm = new FormGroup ({
-      type : new FormControl('',[Validators.required]),
-      objet: new FormControl('',[Validators.required, Validators.minLength(3)]),
-      message: new FormControl('',[Validators.required, Validators.minLength(10)]),
-    });
-  
+  async ngOnInit() {
+    try {
+      this.enseignants = await this.enseignantService.getAllTeachersStudent();
+    } catch (error) {
+      console.error("Erreur lors du chargement des enseignants", error);
+    }
+  }
 
-  envoyerReclamation() {
-    if (this.reclamationForm.valid) {
-      const data = this.reclamationForm.value;
+  async envoyerReclamation() {
+    if (this.reclamationForm.invalid) return;
 
-      // Simule l'envoi au backend
-      console.log('Réclamation envoyée :', data);
+    const raw = this.reclamationForm.getRawValue();
+    const data = {
+      type: raw.type ?? '',
+      subject: raw.subject ?? '',
+      message: raw.message ?? '',
+      teacher: raw.teacher ?? ''
+    };
 
-      // Réinitialisation + message succès
-      this.reclamationForm.reset();
+    try {
+      await this.reclamationService.envoyerReclamation(data);
       this.confirmation = true;
-
-      setTimeout(() => this.confirmation = false, 4000);
+      this.reclamationForm.reset();
+    } catch (err: any) {
+      alert(err.message || "Erreur lors de l'envoi.");
     }
   }
 }

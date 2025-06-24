@@ -1,3 +1,5 @@
+import { AnnoncesDetailComponent } from './annonces-detail/annonces-detail.component';
+import { ActualitesDetailComponent } from './actualites-detail/actualites-detail.component';
 import { InfosLayoutComponent } from './infos-layout/infos-layout.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { AnnoncesComponent } from './annonces/annonces.component';
@@ -18,8 +20,16 @@ const routes: Routes = [
         component: ActualitesComponent
       },
       {
+        path: 'actualites/:id',
+        component: ActualitesDetailComponent
+      },
+      {
         path: 'annonces',
         component: AnnoncesComponent
+      },
+      {
+        path: 'annonces/:id',
+        component: AnnoncesDetailComponent
       },
       {
         path: 'contact',

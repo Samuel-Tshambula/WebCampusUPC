@@ -1,5 +1,7 @@
+import { CookieService } from './../../../core/services/cookie.service';
+import { AuthService } from './../../../core/services/auth.service';
 import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,56 +10,21 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
- enseignant = {
-    nom: 'Prof. Mavungu',
-    email: 'mavungu@upc.cd',
-    cours: [
-      {
-        nom: 'Réseaux Informatiques',
-        promotions: ['L2 Informatique', 'L3 Informatique']
-      },
-      {
-        nom: 'Programmation Web',
-        promotions: ['L2 Informatique']
-      },
-      {
-        nom: 'Administration Systèmes',
-        promotions: ['L3 Informatique', 'M1 Réseaux']
-      }
-    ]
-  };
+  cookie: CookieService = inject(CookieService);
+  teacherId = String(this.cookie.get('id')); // 👉 Remplace ceci dynamiquement selon l'utilisateur connecté
+  profile: any = null;
+  courses: any[] = [];
+  totalReclamations: number = 0;
+  teacherService: AuthService = inject(AuthService);
 
-  nombreReclamations = 5;
-
-  reclamationsNonLues = [
-    {
-      objet: 'Note non conforme',
-      etudiant: 'Jean Kongo',
-      promotion: 'L2 Informatique'
-    },
-    {
-      objet: 'Correction non reçue',
-      etudiant: 'Merveille Tshimanga',
-      promotion: 'L3 Informatique'
+  async ngOnInit() {
+    try {
+      const data = await this.teacherService.getDashboard(this.teacherId);
+      this.profile = data.profile;
+      this.courses = data.courses;
+      this.totalReclamations = data.reclamations.total;
+    } catch (err) {
+      console.error(err);
     }
-  ];
-
-  annonces = [
-    {
-      titre: 'Réunion pédagogique',
-      date: '03 juin 2025',
-      message: 'Une réunion est prévue ce vendredi à 10h pour discuter des examens.'
-    },
-    {
-      titre: 'Nouvelle grille horaire',
-      date: '01 juin 2025',
-      message: 'La nouvelle grille horaire est disponible sur votre espace enseignant.'
-    }
-  ];
-
-  constructor() {}
-
-  ngOnInit(): void {
-    // Ici tu pourras plus tard charger les données dynamiquement depuis un service
   }
 }

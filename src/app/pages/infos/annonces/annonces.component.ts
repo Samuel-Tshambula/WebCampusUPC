@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { AnnonceItem } from './../../../core/models/annonce';
+import { AnnonceService } from './../../../core/services/annonce.service';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -9,85 +11,36 @@ import { RouterLink } from '@angular/router';
   styleUrl: './annonces.component.css'
 })
 export class AnnoncesComponent {
-    annonces = [
-    {
-      id: 1,
-      titre: 'Suspension des cours L3',
-      contenu: 'Les cours de la promotion L3 sont suspendus ce vendredi en raison...',
-      date: new Date('2025-06-01'),
-    },
-    {
-      id: 2,
-      titre: 'Remise des attestations',
-      contenu: 'Les étudiants de la promo L2 sont invités à retirer leurs attestations...',
-      date: new Date('2025-06-02'),
-    },
-    // Ajoutez plus d'annonces ici
-    {
-      id: 2,
-      titre: 'Remise des attestations',
-      contenu: 'Les étudiants de la promo L2 sont invités à retirer leurs attestations...',
-      date: new Date('2025-06-02'),
-    },
-    {
-      id: 2,
-      titre: 'Remise des attestations',
-      contenu: 'Les étudiants de la promo L2 sont invités à retirer leurs attestations...',
-      date: new Date('2025-06-02'),
-    },
-    {
-      id: 2,
-      titre: 'Remise des attestations',
-      contenu: 'Les étudiants de la promo L2 sont invités à retirer leurs attestations...',
-      date: new Date('2025-06-02'),
-    },
-    {
-      id: 2,
-      titre: 'Remise des attestations',
-      contenu: 'Les étudiants de la promo L2 sont invités à retirer leurs attestations...',
-      date: new Date('2025-06-02'),
-    },
-    {
-      id: 2,
-      titre: 'Remise des attestations',
-      contenu: 'Les étudiants de la promo L2 sont invités à retirer leurs attestations...',
-      date: new Date('2025-06-02'),
-    },
-    {
-      id: 2,
-      titre: 'Remise des attestations',
-      contenu: 'Les étudiants de la promo L2 sont invités à retirer leurs attestations...',
-      date: new Date('2025-06-02'),
-    },
-    {
-      id: 2,
-      titre: 'Remise des attestations',
-      contenu: 'Les étudiants de la promo L2 sont invités à retirer leurs attestations...',
-      date: new Date('2025-06-02'),
-    },
-  ];
+  pages: number[] = []
+  annonceService : AnnonceService = inject(AnnonceService);
+  paginatedAnnonces: AnnonceItem[] = []; 
+ 
 
-  currentPage = 1;
-  itemsPerPage = 6;
-
-  get paginatedAnnonces() {
-    const start = (this.currentPage - 1) * this.itemsPerPage;
-    return this.annonces.slice(start, start + this.itemsPerPage);
+  async ngOnInit() {
+    await this.loadPage(1);
   }
 
-  get totalPages() {
-    return Math.ceil(this.annonces.length / this.itemsPerPage);
-  }
-
-  get pages(): number[] {
-    return Array(this.totalPages)
-      .fill(0)
-      .map((_, i) => i + 1);
+  async loadPage(page: number) {
+    await this.annonceService.getPaginatedAnnonces(page);
+    this.paginatedAnnonces = this.annonceService.annonceArray;
+    this.generatePages();
   }
 
   goToPage(page: number) {
-    if (page >= 1 && page <= this.totalPages) {
-      this.currentPage = page;
+    if (page >= 1 && page <= this.annonceService.totalPages) {
+      this.loadPage(page);
     }
+  }
+
+  generatePages() {
+    this.pages = Array.from({ length: this.annonceService.totalPages }, (_, i) => i + 1);
+  }
+
+  get currentPage() {
+    return this.annonceService.currentPage;
+  }
+
+  get totalPages() {
+    return this.annonceService.totalPages;
   }
 }

@@ -7,6 +7,7 @@
 
       <div class="card p-4 shadow-sm animate__animated animate__fadeInUp">
         <form [formGroup]="reclamationForm" (ngSubmit)="envoyerReclamation()">
+          <!-- Type -->
           <div class="mb-3">
             <label class="form-label fw-semibold">Type de réclamation</label>
             <select formControlName="type" class="form-select" required>
@@ -17,12 +18,23 @@
               <option value="autre">Autre</option>
             </select>
           </div>
-
+ 
+          <!-- Objet (subject) -->
           <div class="mb-3">
             <label class="form-label fw-semibold">Objet</label>
-            <input type="text" formControlName="objet" class="form-control" placeholder="Ex: Erreur dans ma note de math" required />
+            <input type="text" formControlName="subject" class="form-control" placeholder="Ex: Erreur dans ma note de math" required />
           </div>
 
+          <!-- Enseignant concerné -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Enseignant concerné</label>
+            <select formControlName="teacher" class="form-select" required>
+              <option value="" disabled selected>Choisir un enseignant</option>
+              <option *ngFor="let prof of enseignants" [value]="prof._id">{{ prof.fullName }}</option>
+            </select>
+          </div>
+
+          <!-- Message -->
           <div class="mb-3">
             <label class="form-label fw-semibold">Message</label>
             <textarea formControlName="message" rows="5" class="form-control" placeholder="Décrivez clairement votre réclamation..." required></textarea>

@@ -9,13 +9,12 @@
     <div class="col" *ngFor="let rec of reclamationsFiltrees">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <h5 class="card-title">{{ rec.objet }}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Cours : {{ rec.cours }}</h6>
+          <h5 class="card-title">{{ rec.subject }}</h5>
           <p class="card-text">
             <strong>Type :</strong> {{ rec.type }} <br />
-            <strong>Étudiant :</strong> {{ rec.etudiant.nom }} <br />
-            <strong>Promotion :</strong> {{ rec.etudiant.promotion }} <br />
-            <strong>Date :</strong> {{ rec.date }}
+            <strong>Étudiant :</strong> {{ rec.student.fullName }} <br />
+            <strong>Promotion :</strong> {{ rec.student.promotion.nom }} - {{ rec.student.promotion.section.name }} <br />
+            <strong>Date :</strong> {{ rec.createdAt | date:'dd/MM/yyyy HH:mm' }}
           </p>
           <button class="btn btn-outline-primary btn-sm" (click)="ouvrirDetails(rec)">Voir détails</button>
         </div>
@@ -28,16 +27,16 @@
     <div class="modal-dialog">
       <div class="modal-content shadow">
         <div class="modal-header">
-          <h5 class="modal-title">{{ reclamationSelectionnee.objet }}</h5>
-          <button type="button" class="btn-close" (click)="fermerDetails()"></button>
-        </div>
-        <div class="modal-body">
+          <h5 class="modal-title">{{ reclamationSelectionnee.subject }}</h5>
+
           <p><strong>Type :</strong> {{ reclamationSelectionnee.type }}</p>
           <p><strong>Message :</strong> {{ reclamationSelectionnee.message }}</p>
-          <p><strong>Étudiant :</strong> {{ reclamationSelectionnee.etudiant.nom }}</p>
-          <p><strong>Promotion :</strong> {{ reclamationSelectionnee.etudiant.promotion }}</p>
-          <p><strong>Date :</strong> {{ reclamationSelectionnee.date }}</p>
-        </div>
+          <p><strong>Étudiant :</strong> {{ reclamationSelectionnee.student.fullName }}</p>
+          <p><strong>Promotion :</strong> 
+            {{ reclamationSelectionnee.student.promotion.nom }} - 
+            {{ reclamationSelectionnee.student.promotion.section.name }}
+          </p>
+          <p><strong>Date :</strong> {{ reclamationSelectionnee.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
         <div class="modal-footer">
           <button class="btn btn-secondary" (click)="fermerDetails()">Fermer</button>
         </div>

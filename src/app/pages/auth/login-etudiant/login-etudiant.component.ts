@@ -38,8 +38,12 @@ export class LoginEtudiantComponent {
     try {
       const result = await this.authService.loginStudent({ cardNumber: cardNumber||'', password: password || '' });
       this.cookie.set('token', result.token);
-      this.cookie.set('role', result);
-      this.router.navigate(['/valve-etudiant']);
+      this.cookie.set('role', result.student.role);
+      this.cookie.set('name', result.student.fullName);
+      this.cookie.set('promotionId', result.student.idPromotion);
+      this.cookie.set('Id', result.student.id);
+      this.authService.setRole('student');
+      this.router.navigate(['/']);
     } catch (err: any) {
       this.message = err.error?.message || 'Erreur de connexion';
       this.isError = true;

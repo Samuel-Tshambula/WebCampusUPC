@@ -58,6 +58,8 @@ async addPromotion(nom: string, section: string, faculty: string): Promise<{ mes
     return await res.json();
   }
 
+  
+
   async updatePromotion(id: string, nom: string, section: string, faculty: string): Promise<{ message: string }> {
     const token = this.cookie.get('token');
     const res = await fetch(`${this.URL}/${id}`, {

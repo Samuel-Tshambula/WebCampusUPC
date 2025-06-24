@@ -1,27 +1,24 @@
 <div class="container my-5 pt-4">
   <h2 class="text-center mb-4 fw-bold text-success animate__animated animate__fadeInDown">
-    📅 Horaire de cours - {{ promotion }}
+    📅 Horaire de cours - {{ etudiant?.promotion?.nom }} - {{ etudiant?.promotion?.section?.name }}
   </h2>
 
   <div *ngIf="horaires.length > 0; else noData">
-    <div class="card shadow-sm p-4 border-0 animate__animated animate__fadeInUp">
+    <div class="card shadow-sm p-4 border-0 animate__animated animate__fadeInUp" *ngFor="let groupe of horaires">
+      <h5 class="fw-bold text-primary mb-3">📌 {{ groupe.jour }}</h5>
       <div class="table-responsive">
         <table class="table table-striped align-middle">
           <thead class="table-success">
             <tr>
-              <th>Jour</th>
               <th>Heure</th>
               <th>Cours</th>
-              <th>Professeur</th>
               <th>Salle</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let h of horaires">
-              <td>{{ h.jour }}</td>
-              <td>{{ h.heure }}</td>
-              <td>{{ h.cours }}</td>
-              <td>{{ h.prof }}</td>
+            <tr *ngFor="let h of groupe.cours">
+              <td>{{ h.heure_debut }} - {{ h.heure_fin }}</td>
+              <td>{{ h.cours.title }}</td>
               <td>{{ h.salle }}</td>
             </tr>
           </tbody>
@@ -36,4 +33,3 @@
     </div>
   </ng-template>
 </div>
-

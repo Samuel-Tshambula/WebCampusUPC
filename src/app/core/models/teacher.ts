@@ -31,3 +31,12 @@ export interface TeacherItem {
     };
   }[];
 }
+
+export interface TeacherStudent {
+        _id: string;
+        fullName: string;
+        email: string;
+        courses: string[];
+        __v: number;
+        phone: string
+}

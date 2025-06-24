@@ -1,29 +1,32 @@
-import { Component, AfterViewInit  } from '@angular/core';
+import { AuthService } from './../../core/services/auth.service';
+import { RouterLink } from '@angular/router';
+import { Component, AfterViewInit, inject } from '@angular/core';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements AfterViewInit {
-  ngAfterViewInit(): void {
-  const counters = document.querySelectorAll('.counter');
-  counters.forEach(counter => {
-    const updateCount = () => {
-      const target = +counter.getAttribute('data-target')!;
-      const count = +counter.innerHTML;
-      const increment = target / 100;
 
-      if (count < target) {
-        counter.innerHTML = `${Math.ceil(count + increment)}`;
-        setTimeout(updateCount, 20);
-      } else {
-        counter.innerHTML = target.toString();
-      }
-    };
-    updateCount();
-  });
-}
+  private statsService: AuthService = inject(AuthService);
+
+  students = 0;
+  teachers = 0;
+  tps = 0;
+  promotions = 0;
+
+  async ngAfterViewInit(): Promise<void> {
+    try {
+      const stats = await this.statsService.getStats();
+      this.students = stats.studentsConnected;
+      this.teachers = stats.teachers;
+      this.tps = stats.tpsPublished;
+      this.promotions = stats.activePromotions;
+    } catch (error) {
+      console.error('Erreur stats :', error);
+    }
+  }
 
 }

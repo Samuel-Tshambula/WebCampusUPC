@@ -123,4 +123,21 @@ async updateHoraire(id: string, data: Horaire): Promise<{ message: string }> {
   return await response.json();
 }
 
+async getHoraireParEtudiant(): Promise<any[]> {
+    const token = this.cookie.get('token');
+
+    const res = await fetch(`${this.BASE_URL}/by/student`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || 'Erreur lors de la récupération des horaires');
+    }
+
+    return res.json();
+  }
+
 }

@@ -21,6 +21,7 @@
     "@angular/platform-server": "^19.1.0",
     "@angular/router": "^19.1.0",
     "@angular/ssr": "^19.1.4",
+    "@ng-select/ng-select": "^14.1.0",
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.13.1",
     "dayjs": "^1.11.13",

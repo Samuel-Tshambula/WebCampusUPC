@@ -1,7 +1,7 @@
+import { TpDetailComponent } from './tp-detail/tp-detail.component';
 import { TPComponent } from './tp/tp.component';
 import { ReclamationComponent } from './reclamation/reclamation.component';
 import { DeliberationComponent } from './deliberation/deliberation.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { HorairesComponent } from './horaires/horaires.component';
 import { LayoutValveComponent } from './layout-valve/layout-valve.component';
 import { NgModule } from '@angular/core';
@@ -18,10 +18,6 @@ const routes: Routes = [
         component: HorairesComponent
       },
       {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-      {
         path: 'deliberation',
         component: DeliberationComponent
       },
@@ -32,6 +28,10 @@ const routes: Routes = [
       {
         path: 'tp',
         component: TPComponent
+      },
+      {
+        path: 'tp/edit/:id',
+        component: TpDetailComponent
       }
     ]
   }

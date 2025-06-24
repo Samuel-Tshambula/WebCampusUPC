@@ -1,13 +1,15 @@
-<div class="container mt-4">
+<div class="container mt-5 pt-5">
   <h2 class="mb-4">Publier un TP</h2>
 
   <form [formGroup]="tpForm" (ngSubmit)="submitTP()">
     <div class="mb-3">
       <label for="promotion" class="form-label">Promotion</label>
       <select id="promotion" class="form-select" formControlName="promotion">
-        <option value="">Sélectionner une promotion</option>
-        <option *ngFor="let promo of promotions" [value]="promo">{{ promo }}</option>
-      </select>
+      <option [ngValue]="''">Sélectionner un cours</option>
+      <option *ngFor="let item of coursAvecPromotion" [value]="item.value">
+        {{ item.label }}
+      </option>
+    </select>
       <div *ngIf="tpForm.get('promotion')?.invalid && tpForm.get('promotion')?.touched" class="text-danger">
         La promotion est requise.
       </div>
@@ -30,6 +32,14 @@
     </div>
 
     <div class="mb-3">
+      <label for="deadline" class="form-label">Date limite</label>
+      <input id="deadline" type="date" class="form-control" formControlName="deadline">
+      <div *ngIf="tpForm.get('deadline')?.invalid && tpForm.get('deadline')?.touched" class="text-danger">
+        La date limite est requise.
+      </div>
+    </div>
+
+    <div class="mb-3">
       <label for="fichier" class="form-label">Fichier TP (facultatif)</label>
       <input id="fichier" type="file" class="form-control" (change)="onFileSelected($event)">
     </div>
@@ -41,3 +51,8 @@
     TP publié avec succès !
   </div>
 
+  <div *ngIf="isError" class="alert alert-danger alert-dismissible mt-3">
+    {{ message }}
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeAlert()"></button>
+  </div>
+</div>

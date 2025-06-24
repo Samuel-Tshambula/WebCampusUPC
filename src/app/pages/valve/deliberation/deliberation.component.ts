@@ -1,3 +1,5 @@
+import { PromotionService } from './../../../core/services/promotion.service';
+import { CookieService } from './../../../core/services/cookie.service';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './../../../core/services/auth.service';
 import { DeliberationService } from './../../../core/services/deliberation.service';
@@ -11,32 +13,45 @@ import { CommonModule, NgFor, NgIf, NgClass } from '@angular/common';
   styleUrl: './deliberation.component.css'
 })
 export class DeliberationComponent {
-  authService: AuthService = inject(AuthService);
-  deliberationService: DeliberationService = inject(DeliberationService);
+  private authService: AuthService = inject(AuthService);
+  private deliberationService: DeliberationService = inject(DeliberationService);
 
-  promotion: string = '';
-  etudiant: any;
-  resultatsPromotion: any[] = [];
-  searchTerm: string = ''; // Mot-clé recherché
-  resultatsFiltres: any[] = []; // Résultat après tri et filtre
+  etudiant: any = null;
+  promotion: any = null;
+  deliberations: any[] = [];
+  totalCredits: number = 0;
+  moyenne: number | null = null;
 
-  ngOnInit() {
-    this.etudiant = this.authService.getEtudiantConnecte();
-    this.promotion = this.etudiant.promotion;
-    const resultats = this.deliberationService.getDeliberationParPromotion(this.promotion);
+  async ngOnInit() {
+    try {
+      this.etudiant = await this.authService.getEtudiantConnecte();
+      this.promotion = this.etudiant.promotion;
 
-    // Tri alphabétique par nom
-    this.resultatsPromotion = resultats.sort((a, b) =>
-      a.nom.localeCompare(b.nom)
-    );
+      const resultats = await this.deliberationService.getDeliberationsByEtudiant();
 
-    this.resultatsFiltres = [...this.resultatsPromotion]; // Initialisation
-  }
+      this.deliberations = resultats
+        .filter((d:any) => d.course && d.grade !== undefined)
+        .map((d:any) => ({
+          title: d.course.title,
+          grade: d.grade,
+          credit: d.course.credits
+        }));
 
-  rechercherEtudiant() {
-    const terme = this.searchTerm.trim().toLowerCase();
-    this.resultatsFiltres = this.resultatsPromotion.filter(e =>
-      e.nom.toLowerCase().includes(terme)
-    );
+      const allGradesPresent = this.deliberations.every(d => d.grade !== null && d.grade !== undefined);
+      const validNotes = this.deliberations.filter(d => typeof d.grade === 'number');
+
+      if (allGradesPresent && validNotes.length > 0) {
+        const totalPoints = validNotes.reduce((sum, d) => sum + d.grade * d.credit, 0);
+        const totalCredits = validNotes.reduce((sum, d) => sum + d.credit, 0);
+        this.totalCredits = totalCredits;
+        this.moyenne = +(totalPoints / totalCredits).toFixed(2);
+      } else {
+        this.moyenne = null;
+        this.totalCredits = 0;
+      }
+
+    } catch (error) {
+      console.error('Erreur chargement délibérations:', error);
+    }
   }
 }

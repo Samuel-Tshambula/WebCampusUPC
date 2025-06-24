@@ -1,5 +1,5 @@
 import { CookieService } from './cookie.service';
-import { Teacher, TeacherItem } from './../models/teacher';
+import { Teacher, TeacherItem, TeacherStudent } from './../models/teacher';
 import { AuthAdmin } from './../models/auth-admin';
 import { Injectable, inject } from '@angular/core';
 
@@ -9,10 +9,36 @@ import { Injectable, inject } from '@angular/core';
 export class AuthAdminService {
 
   private ADMIN_URL = 'http://localhost:5000/api/admin/'
+  private PROF_URL = 'http://localhost:5000/api/student/professors/'
   cookie : CookieService = inject(CookieService)
-  
+  private apiUrl = 'http://localhost:5000/api/admin/statistique';
 
   constructor() { }
+
+  async getStatistics(): Promise<any> {
+    const token = this.cookie.get('token');
+    if (!token) {
+      throw new Error('Token non trouvé');
+    }
+    try {
+      const response = await fetch(this.apiUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}` // Assurez-vous d'envoyer le token dans l'en-tête Authorization
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error('Erreur lors de la récupération des statistiques');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Erreur dans DashboardService:', error);
+      throw error;
+    }
+  }
 
   async loginAdmin(username: string, password: string): Promise<AuthAdmin> {
 
@@ -54,6 +80,17 @@ export class AuthAdminService {
   async getAllTeachers(): Promise<TeacherItem[]> {
     let token = this.cookie.get('token')
     const res = await fetch(this.ADMIN_URL+'teachers',{
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (!res.ok) throw new Error("Erreur lors du chargement des professeurs");
+    return await res.json();
+  }
+
+  async getAllTeachersStudent(): Promise<TeacherStudent[]> {
+    let token = this.cookie.get('token')
+    const res = await fetch(this.PROF_URL,{
       headers: {
         'Authorization': `Bearer ${token}`
       }

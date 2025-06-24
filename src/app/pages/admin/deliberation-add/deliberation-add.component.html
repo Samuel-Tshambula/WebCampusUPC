@@ -1,1 +1,86 @@
-<p>deliberation-add works!</p>
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-warning">➕ Ajouter une Délibération</h3>
+
+  <!-- Message -->
+  <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'">
+    {{ message }}
+    <button class="btn-close float-end" (click)="closeAlert()"></button>
+  </div>
+
+  <form [formGroup]="deliberationForm" (ngSubmit)="submitDeliberation()">
+    
+    <!-- Promotion --> 
+    <div class="mb-3">
+      <label class="form-label">Promotion</label>
+      <select class="form-select bg-dark text-light" (change)="handlePromotionChange($event)">
+        <option selected disabled>Choisir une promotion</option>
+        <option *ngFor="let promo of promotions" [value]="promo._id">
+          {{ promo.nom }} - {{ promo.section.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Étudiant -->
+    <!-- Étudiant -->
+<div class="mb-3">
+  <label class="form-label">Étudiant</label>
+  <ng-select
+    [items]="filteredStudents"
+    bindLabel="fullName"
+    bindValue="_id"
+    placeholder="🔍 Rechercher ou sélectionner un étudiant"
+    formControlName="student"
+    [searchable]="true"
+    [clearable]="true"
+    class="custom-ng-select w-100">
+
+    <!-- Template pour l'option affichée dans le champ -->
+    <ng-template ng-label-tmp let-item="item">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-person-circle text-warning"></i>
+        <span class="fw-semibold">{{ item.fullName }}</span>
+        <small class="text-muted">({{ item.cardNumber }})</small>
+      </div>
+    </ng-template>
+
+    <!-- Template pour les options dans la liste -->
+    <ng-template ng-option-tmp let-item="item">
+      <div class="d-flex justify-content-between">
+        <span>{{ item.fullName }}</span>
+        <small class="text-muted">({{ item.cardNumber }})</small>
+      </div>
+    </ng-template>
+  </ng-select>
+</div>
+
+
+
+    <!-- Cours -->
+   <div class="mb-3">
+  <label class="form-label">Cours</label>
+  <select formControlName="course" class="form-select bg-dark text-light" [disabled]="filteredCourses.length === 0">
+    <option *ngFor="let c of filteredCourses" [value]="c._id">
+      {{ c.title }} - {{ c.promotion.nom }} {{ c.promotion.section.name }}
+    </option>
+  </select>
+</div>
+
+    <!-- Note -->
+    <div class="mb-3">
+      <label class="form-label">Note</label>
+      <input 
+        type="number" 
+        class="form-control bg-dark text-light" 
+        formControlName="grade" 
+        placeholder="Ex: 15" 
+        min="0" 
+        max="20"
+        step="0.1"
+      />
+    </div>
+
+    <button class="btn btn-warning w-100 fw-bold" [disabled]="deliberationForm.invalid">
+      <i class="bi bi-plus-circle me-1"></i> Ajouter
+    </button>
+  </form>
+</div>

@@ -1,4 +1,5 @@
-import { TpComponent } from './tp/tp.component';
+import { DeliberationUpdateComponent } from './deliberation-update/deliberation-update.component';
+import { ListDeliberationComponent } from './list-deliberation/list-deliberation.component';
 import { ListePromotionEtudiantComponent } from './liste-promotion-etudiant/liste-promotion-etudiant.component';
 import { HorairesUpdateComponent } from './horaires-update/horaires-update.component';
 import { ListHoraireComponent } from './list-horaire/list-horaire.component';
@@ -56,6 +57,14 @@ const routes: Routes = [
       {
         path: 'deliberation',
         component: DeliberationComponent
+      },
+      {
+        path: 'deliberation/promotion/:promotionId',
+        component : ListDeliberationComponent
+      },
+      {
+        path: 'deliberation/edit/:promotionId',
+        component : DeliberationUpdateComponent
       },
       {
         path: 'enseignants',
@@ -140,10 +149,6 @@ const routes: Routes = [
       {
         path: 'cours/view/:id',
         component: CoursViewComponent
-      },
-      {
-        path: 'tp',
-        component: TpComponent
       }
     ]
   }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import { AdminRoutingModule } from './admin-routing.module';
 
@@ -8,7 +9,8 @@ import { AdminRoutingModule } from './admin-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    NgSelectModule
   ]
 })
 export class AdminModule { }

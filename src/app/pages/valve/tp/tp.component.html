@@ -1,44 +1,69 @@
-<div class="container my-4">
-  <h3 class="text-center mb-4">📘 Travaux Pratiques – {{ promotion }}</h3>
+<div class="container my-5 pt-5">
+  <h3 class="text-center mb-4 text-primary">
+    📘 Travaux Pratiques – {{ promotionLabel }}
+  </h3>
 
   <div *ngIf="tpsDisponibles.length > 0; else aucunTP">
     <ul class="list-group">
       <li
         *ngFor="let tp of tpsDisponibles"
-        class="list-group-item d-flex justify-content-between align-items-center"
+        class="list-group-item d-flex flex-column flex-md-row justify-content-between align-items-start gap-3"
       >
-        <div>
-          <strong>{{ tp.cours }}</strong><br />
+        <div class="flex-grow-1">
+          <h5 class="mb-1 text-success">
+            <i class="bi bi-journal-code me-1"></i>{{ tp.title }}
+          </h5>
           <small class="text-muted">
-            Par {{ tp.enseignant }} – Date limite : {{ tp.dateLimite | date:'dd/MM/yyyy' }}
-            <br />
-            <span class="text-danger" *ngIf="joursRestants(tp.dateLimite) <= 3">
-              ⏰ Il reste {{ joursRestants(tp.dateLimite) }} jour(s) !
+            Date limite : {{ tp.deadline | date:'dd/MM/yyyy' }}<br />
+            <span *ngIf="joursRestants(tp.deadline) <= 3" class="text-danger fw-semibold">
+              ⏰ Il reste {{ joursRestants(tp.deadline) }} jour(s)
             </span>
           </small>
         </div>
-        <button class="btn btn-sm btn-outline-primary" (click)="voirDetails(tp)">
-          Voir les détails
-        </button>
+
+        <div class="d-flex flex-wrap gap-2 mt-2 mt-md-0">
+          <button class="btn btn-outline-primary btn-sm" (click)="voirDetails(tp)">
+            <i class="bi bi-eye me-1"></i> Détails
+          </button>
+
+          <a
+            *ngIf="tp.file"
+            [href]="getFileUrl(tp.file)"
+            class="btn btn-outline-success btn-sm"
+            download
+          >
+            <i class="bi bi-download me-1"></i> Télécharger
+          </a>
+        </div>
       </li>
     </ul>
 
     <!-- Détails du TP sélectionné -->
     <div *ngIf="tpSelectionne" class="card mt-4 shadow-sm animate__animated animate__fadeIn">
       <div class="card-header bg-primary text-white">
-        <strong>Détails du TP : {{ tpSelectionne.cours }}</strong>
+        <strong><i class="bi bi-info-circle me-1"></i> Détails du TP : {{ tpSelectionne.title }}</strong>
       </div>
       <div class="card-body">
-        <p><strong>Enseignant :</strong> {{ tpSelectionne.enseignant }}</p>
-        <p><strong>Date limite :</strong> {{ tpSelectionne.dateLimite | date:'dd/MM/yyyy' }}</p>
         <p><strong>Description :</strong></p>
         <p class="text-muted">{{ tpSelectionne.description }}</p>
+        <p><strong>Date limite :</strong> {{ tpSelectionne.deadline | date:'dd/MM/yyyy' }}</p>
 
-        <button class="btn btn-sm btn-secondary mt-2" (click)="fermerDetails()">Fermer</button>
+        <p *ngIf="tpSelectionne.file">
+          <strong>Fichier :</strong>
+          <a
+            [href]="getFileUrl(tpSelectionne.file)"
+            download
+            class="btn btn-sm btn-outline-success ms-2"
+          >
+            📥 Télécharger le fichier
+          </a>
+        </p>
+
       </div>
     </div>
   </div>
 
+  <!-- Aucun TP -->
   <ng-template #aucunTP>
     <div class="alert alert-warning text-center mt-4">
       Aucun TP disponible actuellement pour votre promotion.

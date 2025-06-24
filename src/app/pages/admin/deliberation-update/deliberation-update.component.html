@@ -1,1 +1,58 @@
-<p>deliberation-update works!</p>
+<div class="container my-5 pt-4 text-light">
+  <h3 class="text-center fw-bold mb-4 text-warning">✏️ Modifier une Délibération</h3>
+
+  <!-- Message -->
+  <div *ngIf="message" class="alert" [ngClass]="isError ? 'alert-danger' : 'alert-success'">
+    {{ message }}
+    <button class="btn-close float-end" (click)="closeAlert()"></button>
+  </div>
+
+  <form [formGroup]="deliberationForm" (ngSubmit)="updateDeliberation()">
+
+    <!-- Étudiant -->
+    <div class="mb-3">
+      <label class="form-label">Étudiant</label>
+      <ng-select
+        [items]="filteredStudents"
+        bindLabel="fullName"
+        bindValue="_id"
+        formControlName="student"
+        [searchable]="true"
+        placeholder="Sélectionner un étudiant ou rechercher par nom"
+        class="w-100 custom-ng-select"
+      >
+        <ng-template ng-option-tmp let-item="item">
+          {{ item.fullName }} ({{ item.cardNumber }})
+        </ng-template>
+      </ng-select>
+    </div>
+
+    <!-- Cours -->
+    <div class="mb-3">
+      <label class="form-label">Cours</label>
+      <select formControlName="course" class="form-select bg-dark text-light">
+        <option *ngFor="let c of filteredCourses" [value]="c._id">
+          {{ c.title }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Note -->
+    <div class="mb-3">
+      <label class="form-label">Note</label>
+      <input
+        type="number"
+        class="form-control bg-dark text-light"
+        formControlName="grade"
+        min="0"
+        max="20"
+        step="0.1"
+        placeholder="Ex: 15.5"
+      />
+    </div>
+
+    <button class="btn btn-warning w-100 fw-bold" [disabled]="deliberationForm.invalid">
+      <i class="bi bi-pencil-square me-1"></i> Mettre à jour
+    </button>
+  </form>
+</div>

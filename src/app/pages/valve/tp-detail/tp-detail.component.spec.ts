@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TpComponent } from './tp.component';
+import { TpDetailComponent } from './tp-detail.component';
 
-describe('TpComponent', () => {
-  let component: TpComponent;
-  let fixture: ComponentFixture<TpComponent>;
+describe('TpDetailComponent', () => {
+  let component: TpDetailComponent;
+  let fixture: ComponentFixture<TpDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TpComponent]
+      imports: [TpDetailComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TpComponent);
+    fixture = TestBed.createComponent(TpDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

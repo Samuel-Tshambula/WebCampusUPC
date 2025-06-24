@@ -1,1 +1,63 @@
-<p>dashboard works!</p>
+<div class="container my-5">
+  <h2 class="text-center text-primary mb-4">📊 Statistiques Globales</h2>
+
+  <!-- En cas d'erreur -->
+  <div *ngIf="errorMessage" class="alert alert-danger text-center">
+    {{ errorMessage }}
+  </div>
+
+  <!-- En attente des données -->
+  <div *ngIf="!stats && !errorMessage" class="text-center">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2">Chargement des statistiques...</p>
+  </div>
+
+  <!-- Affichage des statistiques -->
+  <div *ngIf="stats" class="row g-4">
+    <div class="col-md-4">
+      <div class="card border-primary shadow-sm text-center">
+        <div class="card-body">
+          <h5 class="card-title">Étudiants</h5>
+          <p class="display-6 text-primary">{{ stats.totalStudents }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-success shadow-sm text-center">
+        <div class="card-body">
+          <h5 class="card-title">Enseignants</h5>
+          <p class="display-6 text-success">{{ stats.totalTeachers }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-warning shadow-sm text-center">
+        <div class="card-body">
+          <h5 class="card-title">Sections</h5>
+          <p class="display-6 text-warning">{{ stats.totalSections }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card border-info shadow-sm text-center">
+        <div class="card-body">
+          <h5 class="card-title">Facultés</h5>
+          <p class="display-6 text-info">{{ stats.totalFaculties }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card border-danger shadow-sm text-center">
+        <div class="card-body">
+          <h5 class="card-title">Travaux Pratiques</h5>
+          <p class="display-6 text-danger">{{ stats.totalTPs }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

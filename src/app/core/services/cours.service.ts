@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 export class CoursService {
 
   private URL = 'http://localhost:5000/api/course';
+  private Prof_URL = 'http://localhost:5000/api/teacher';
 
   constructor(private cookie: CookieService) {}
 
@@ -60,6 +61,20 @@ export class CoursService {
       }
     });
     if (!res.ok) throw new Error('Erreur lors du chargement du cours');
+    return await res.json();
+  }
+
+  async getCoursEnseignes(id: string): Promise<any> {
+    const token = this.cookie.get('token');
+    const res = await fetch(this.Prof_URL+`/${id}/courses`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || 'Erreur lors de la récupération des cours enseignés');
+    }
     return await res.json();
   }
 

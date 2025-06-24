@@ -7,33 +7,26 @@
     <!-- Carte d'actualité -->
     <div class="col-md-6 col-lg-4" *ngFor="let actu of actualites">
       <div class="card h-100 shadow-sm border-0 animate__animated animate__fadeInUp">
-        <img [src]="actu?.image" class="card-img-top img-fluid" alt="Illustration actualité" />
+       <img 
+        [src]="getImageUrl(actu.image)" 
+        class="card-img-top img-fluid object-fit-cover" 
+        alt="Illustration actualité"
+        style="height: 220px; object-fit: cover;"
+      />
         <div class="card-body d-flex flex-column">
-          <h5 class="card-title text-primary fw-semibold">{{ actu?.titre }}</h5>
-          <p class="card-text text-muted">{{ actu?.description | slice:0:120 }}...</p>
+          <h5 class="card-title text-primary fw-semibold">{{ actu?.title }}</h5>
+          <p class="card-text text-muted">{{ actu?.description| slice:0:120 }}...</p>
           <div class="mt-auto">
-            <a [routerLink]="['/infos/actualites', actu?.id]" class="btn btn-outline-primary btn-sm">
+            <a [routerLink]="['/infos/actualites', actu?._id]" class="btn btn-outline-primary btn-sm">
               Lire plus <i class="bi bi-arrow-right-short"></i>
             </a>
           </div>
         </div>
         <div class="card-footer text-muted small">
-          Publié le {{ actu?.date | date:'dd/MM/yyyy' }}
+          Publié le {{ actu?.createdAt| date:'dd/MM/yyyy' }}
         </div>
       </div>
     </div>
-  </div>
-   <!-- Pagination -->
-  <div class="d-flex justify-content-center mt-4">
-    <button class="btn btn-outline-secondary me-2" (click)="changePage(-1)" [disabled]="page === 1">
-      <i class="bi bi-chevron-left"></i> Précédent
-    </button>
-    <span class="align-self-center px-3 fw-semibold">
-      Page {{ page }} / {{ totalPages }}
-    </span>
-    <button class="btn btn-outline-secondary ms-2" (click)="changePage(1)" [disabled]="page === totalPages">
-      Suivant <i class="bi bi-chevron-right"></i>
-    </button>
   </div>
 </div>
 
