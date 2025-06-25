@@ -1,6 +1,27 @@
-.card {
-  transition: transform 0.2s ease-in-out;
+.dashboard-enseignant h2 {
+  font-size: 2rem;
+  border-left: 5px solid #0d6efd;
+  padding-left: 1rem;
 }
-.card:hover {
-  transform: translateY(-5px);
+
+.dashboard-enseignant .card {
+  background-color: #f9f9f9;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  border-radius: 1rem;
+}
+
+.dashboard-enseignant .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-enseignant .list-group-item {
+  background: transparent;
+  border: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.dashboard-enseignant .badge {
+  font-size: 0.75rem;
 }

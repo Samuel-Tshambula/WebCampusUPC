@@ -1,37 +1,44 @@
-<div class="container py-5 mt-5">
-  <h2 class="mb-4 text-primary">👨‍🏫 Tableau de bord enseignant</h2>
+<div class="container dashboard-enseignant py-5 mt-5">
+  <h2 class="mb-4 fw-bold text-dark">
+    👨‍🏫 Tableau de bord <span class="text-primary">Enseignant</span>
+  </h2>
 
   <!-- Profil -->
-  <div class="card mb-4 shadow-sm">
+  <div class="card mb-4 shadow-sm border-0 rounded-3">
     <div class="card-body">
-      <h5 class="card-title">Profil</h5>
-      <p><strong>Nom :</strong> {{ profile?.fullName }}</p>
-      <p><strong>Email :</strong> {{ profile?.email }}</p>
-      <p><strong>Total des cours :</strong> {{ profile?.totalCourses }}</p>
+      <h5 class="card-title text-uppercase text-primary fw-semibold mb-3">Profil</h5>
+      <ul class="list-unstyled mb-0">
+        <li><strong>Nom :</strong> {{ profile?.fullName }}</li>
+        <li><strong>Email :</strong> {{ profile?.email }}</li>
+        <li><strong>Total des cours :</strong> {{ profile?.totalCourses }}</li>
+      </ul>
     </div>
   </div>
 
-  <!-- Cours -->
-  <div class="card mb-4 shadow-sm">
+  <!-- Cours enseignés -->
+  <div class="card mb-4 shadow-sm border-0 rounded-3">
     <div class="card-body">
-      <h5 class="card-title">Cours enseignés</h5>
-      <ul *ngIf="courses.length > 0; else aucunCours" class="list-group">
-        <li *ngFor="let course of courses" class="list-group-item">
-          <strong>{{ course.title }}</strong> — {{ course.description }} <br />
-          <small class="text-muted">Crédits : {{ course.credits }}</small>
+      <h5 class="card-title text-uppercase text-success fw-semibold mb-3">Cours enseignés</h5>
+
+      <ul *ngIf="courses.length > 0; else aucunCours" class="list-group list-group-flush">
+        <li *ngFor="let course of courses" class="list-group-item d-flex flex-column align-items-start">
+          <div class="fw-bold">{{ course.title }}</div>
+          <small class="text-muted">{{ course.description }}</small>
+          <span class="badge bg-secondary mt-2">Crédits : {{ course.credits }}</span>
         </li>
       </ul>
+
       <ng-template #aucunCours>
-        <p class="text-muted">Aucun cours renseigné.</p>
+        <p class="text-muted mb-0">Aucun cours renseigné.</p>
       </ng-template>
     </div>
   </div>
 
   <!-- Réclamations -->
-  <div class="card shadow-sm">
+  <div class="card shadow-sm border-0 rounded-3">
     <div class="card-body">
-      <h5 class="card-title">Réclamations</h5>
-      <p><strong>Nombre total :</strong> {{ totalReclamations }}</p>
+      <h5 class="card-title text-uppercase text-warning fw-semibold mb-3">Réclamations</h5>
+      <p class="fs-5"><strong>Total :</strong> {{ totalReclamations }}</p>
     </div>
   </div>
 </div>

@@ -1,3 +1,5 @@
+import { authGuard } from './core/guards/auth.guard';
+import { teacherGuard } from './core/guards/teacher.guard';
 import { authAdminGuard } from './core/guards/auth-admin.guard';
 import { LoginAdminComponent } from './pages/auth/login-admin/login-admin.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -15,11 +17,13 @@ export const routes: Routes = [
   },
   {
     path: 'valveetudiants',
-    loadChildren: () => import('./pages/valve/valve.module').then(m => m.ValveModule)
+    loadChildren: () => import('./pages/valve/valve.module').then(m => m.ValveModule),
+    canActivate: [authGuard]
   },
   {
     path: 'enseignant',
-    loadChildren: () => import('./pages/enseignant/enseignant.module').then(m => m.EnseignantModule)
+    loadChildren: () => import('./pages/enseignant/enseignant.module').then(m => m.EnseignantModule),
+    canActivate: [teacherGuard]
   },
   {
     path: 'auth',

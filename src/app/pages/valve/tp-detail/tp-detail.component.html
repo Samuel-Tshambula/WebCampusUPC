@@ -1,35 +1,50 @@
 <div class="container my-5 pt-5">
+  <!-- Chargement -->
   <div *ngIf="isLoading" class="text-center my-5">
     <div class="spinner-border text-primary" role="status"></div>
     <p class="mt-3">Chargement du TP...</p>
   </div>
 
-  <div *ngIf="error" class="alert alert-danger text-center">
+  <!-- Erreur -->
+  <div *ngIf="error" class="alert alert-danger text-center shadow-sm rounded-3">
     {{ error }}
   </div>
 
-  <div *ngIf="tp" class="card shadow">
-    <div class="card-header bg-primary text-white">
-      <h4>{{ tp.title }}</h4>
+  <!-- Contenu du TP -->
+  <div *ngIf="tp" class="card shadow-sm border-0 animate__animated animate__fadeIn rounded-4">
+    <div class="card-header bg-success text-white fw-semibold">
+      <h4 class="mb-0">
+        <i class="bi bi-journal-code me-2"></i>{{ tp.title }}
+      </h4>
     </div>
+
     <div class="card-body">
-      <p><strong>Description :</strong></p>
-      <p class="text-muted">{{ tp.description }}</p>
+      <p class="mb-2">
+        <strong>Description :</strong><br />
+        <span class="text-muted">{{ tp.description }}</span>
+      </p>
 
-      <p><strong>Date de publication :</strong> {{ tp.createdAt | date: 'dd/MM/yyyy' }}</p>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p><strong>📅 Date de publication :</strong> {{ tp.createdAt | date: 'dd/MM/yyyy' }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>👨‍🏫 Enseignant :</strong> {{ tp.teacher?.fullName || 'Non défini' }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>🎓 Promotion :</strong> {{ tp.promotion?.nom }} - {{ tp.promotion?.section?.name }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>🏛️ Faculté :</strong> {{ tp.promotion?.faculty?.nom }}</p>
+        </div>
+      </div>
 
-      <p><strong>Enseignant :</strong> {{ tp.teacher?.fullName || 'Non défini' }}</p>
-
-      <p><strong>Promotion :</strong> {{ tp.promotion?.nom }} - {{ tp.promotion?.section?.name }}</p>
-
-      <p><strong>Faculté :</strong> {{ tp.promotion?.faculty?.nom }}</p>
-
+      <!-- Fichier TP -->
       <div *ngIf="tp.file" class="mt-3">
-        <a [href]="getFileUrl(tp.file)" class="btn btn-success" download>
-          📥 Télécharger le fichier
+        <a [href]="getFileUrl(tp.file)" class="btn btn-outline-success" download>
+          <i class="bi bi-download me-1"></i> Télécharger le fichier
         </a>
       </div>
     </div>
   </div>
 </div>
-

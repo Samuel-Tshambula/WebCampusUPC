@@ -1,26 +1,24 @@
 <footer class="footer-upc mt-auto">
   <div class="container py-4">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 mb-4 mb-md-0">
         <h5 class="text-white">Université Protestante du Congo</h5>
-        <p class="text-light small">Relier les étudiants, enseignants et facultés via le Web Campus.</p>
+        <p class="text-light small">Relier étudiants, enseignants et facultés via le Web Campus.</p>
       </div>
-      <div class="col-md-3">
-        <h6 class="text-warning">Liens utiles</h6>
-        <ul class="list-unstyled text-light">
-          <li><a href="#" class="text-decoration-none text-light">Accueil</a></li>
-          <li><a href="#" class="text-decoration-none text-light">À propos</a></li>
-          <li><a href="#" class="text-decoration-none text-light">Contact</a></li>
+      <div class="col-md-3 mb-3 mb-md-0">
+        <h6 class="text-uppercase text-warning">Liens utiles</h6>
+        <ul class="list-unstyled">
+          <li><a routerLink="/" class="footer-link">Accueil</a></li>
+          <li><a routerLink="/infos/a-propos" class="footer-link">À propos</a></li>
         </ul>
       </div>
       <div class="col-md-3">
-        <h6 class="text-warning">Contact</h6>
-        <p class="text-light small mb-0"><i class="bi bi-envelope-fill me-1"></i> contact&#64;upc.cd</p>
-        <p class="text-light small"><i class="bi bi-telephone-fill me-1"></i> +243 123 456 789</p>
+        <h6 class="text-uppercase text-warning">Contact</h6>
+        <p class="text-light small mb-1"><i class="bi bi-envelope-fill me-2"></i> contact&#64;upc.cd</p>
+        <p class="text-light small"><i class="bi bi-telephone-fill me-2"></i> +243 123 456 789</p>
       </div>
     </div>
-    <hr class="border-light" />
-    <p class="text-center text-secondary small mb-0">© {{ currentYear }} UPC - Web Campus. Tous droits réservés.</p>
+    <hr class="border-secondary" />
+    <p class="text-center text-light small mb-0">© {{ currentYear }} UPC - Web Campus. Tous droits réservés.</p>
   </div>
 </footer>
-

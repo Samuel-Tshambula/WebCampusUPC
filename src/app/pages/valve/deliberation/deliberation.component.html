@@ -1,32 +1,36 @@
-<div class="container my-5 pt-4">
+<div class="container my-5 pt-5">
   <h2 class="text-center mb-4 fw-bold text-primary animate__animated animate__fadeInDown">
-    📊 Délibérations – {{ promotion?.nom }} - {{ promotion?.section?.name }} <br>
-    pour l'étudiant {{ etudiant?.fullName }}
+    📊 Délibérations – {{ promotion?.nom }} – {{ promotion?.section?.name }}<br />
+    pour l’étudiant <span class="text-success">{{ etudiant?.fullName }}</span>
   </h2>
 
   <div *ngIf="deliberations.length > 0; else aucuneDelib">
-    <div class="card shadow-sm p-4 border-0 animate__animated animate__fadeInUp">
+    <div class="card border-0 rounded-4 shadow-sm p-4 animate__animated animate__fadeInUp">
       <div class="table-responsive">
-        <table class="table table-striped align-middle">
-          <thead class="table-primary">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
             <tr>
-              <th>Cours</th>
-              <th>Note</th>
-              <th>Crédit</th>
-              <th>Statut</th>
+              <th>📚 Cours</th>
+              <th>📝 Note</th>
+              <th>🎓 Crédit</th>
+              <th>✅ Statut</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let note of deliberations">
-              <td>{{ note.title }}</td>
-              <td>{{ note.grade }}/20</td>
+              <td class="fw-semibold text-dark">{{ note.title }}</td>
+              <td>
+                <span [ngClass]="{ 'text-success': note.grade >= 10, 'text-danger': note.grade < 10 }">
+                  {{ note.grade }}/20
+                </span>
+              </td>
               <td>{{ note.credit }}</td>
               <td>
                 <span
-                  class="badge"
+                  class="badge px-3 py-2 rounded-pill fw-medium"
                   [ngClass]="{
-                    'bg-success': note.grade >= 10,
-                    'bg-danger': note.grade < 10
+                    'bg-success text-white': note.grade >= 10,
+                    'bg-danger text-white': note.grade < 10
                   }"
                 >
                   {{ note.grade >= 10 ? 'Validé' : 'Échec' }}
@@ -37,17 +41,17 @@
         </table>
       </div>
 
-      <!-- Moyenne & Crédits -->
       <div *ngIf="moyenne !== null" class="mt-4 text-center">
-        <h5 class="fw-bold text-success">
-          Moyenne : {{ moyenne }}/20 – Crédits Validés : {{ totalCredits }}
-        </h5>
+        <div class="alert alert-success border-0 rounded-3 fw-semibold fs-5 mb-0">
+          Moyenne : <strong>{{ moyenne }}/20</strong> &nbsp;–&nbsp;
+          Crédits Validés : <strong>{{ totalCredits }}</strong>
+        </div>
       </div>
     </div>
   </div>
 
   <ng-template #aucuneDelib>
-    <div class="alert alert-info text-center mt-4">
+    <div class="alert alert-info text-center mt-4 shadow-sm rounded-3">
       Aucune délibération disponible pour vous actuellement.
     </div>
   </ng-template>

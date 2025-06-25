@@ -1,5 +1,7 @@
-<div class="container my-5">
-  <h2 class="text-center text-primary mb-4">📊 Statistiques Globales</h2>
+<div class="container-fluid py-4">
+  <h2 class="text-center text-info mb-5 animate__animated animate__fadeInDown">
+    📊 Statistiques Globales
+  </h2>
 
   <!-- En cas d'erreur -->
   <div *ngIf="errorMessage" class="alert alert-danger text-center">
@@ -7,57 +9,56 @@
   </div>
 
   <!-- En attente des données -->
-  <div *ngIf="!stats && !errorMessage" class="text-center">
-    <div class="spinner-border text-primary" role="status"></div>
-    <p class="mt-2">Chargement des statistiques...</p>
+  <div *ngIf="!stats && !errorMessage" class="text-center my-5">
+    <div class="spinner-border text-info" role="status"></div>
+    <p class="mt-2 text-light">Chargement des statistiques...</p>
   </div>
 
-  <!-- Affichage des statistiques -->
-  <div *ngIf="stats" class="row g-4">
+  <!-- Statistiques -->
+  <div *ngIf="stats" class="row g-4 animate__animated animate__fadeInUp">
     <div class="col-md-4">
-      <div class="card border-primary shadow-sm text-center">
+      <div class="card stat-card bg-dark shadow-sm border-info text-center h-100">
         <div class="card-body">
-          <h5 class="card-title">Étudiants</h5>
-          <p class="display-6 text-primary">{{ stats.totalStudents }}</p>
+          <h5 class="card-title text-light">Étudiants</h5>
+          <p class="display-5 fw-bold text-info">{{ stats.totalStudents }}</p>
         </div>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card border-success shadow-sm text-center">
+      <div class="card stat-card bg-dark shadow-sm border-success text-center h-100">
         <div class="card-body">
-          <h5 class="card-title">Enseignants</h5>
-          <p class="display-6 text-success">{{ stats.totalTeachers }}</p>
+          <h5 class="card-title text-light">Enseignants</h5>
+          <p class="display-5 fw-bold text-success">{{ stats.totalTeachers }}</p>
         </div>
       </div>
     </div>
 
     <div class="col-md-4">
-      <div class="card border-warning shadow-sm text-center">
+      <div class="card stat-card bg-dark shadow-sm border-warning text-center h-100">
         <div class="card-body">
-          <h5 class="card-title">Sections</h5>
-          <p class="display-6 text-warning">{{ stats.totalSections }}</p>
+          <h5 class="card-title text-light">Sections</h5>
+          <p class="display-5 fw-bold text-warning">{{ stats.totalSections }}</p>
         </div>
       </div>
     </div>
 
     <div class="col-md-6">
-      <div class="card border-info shadow-sm text-center">
+      <div class="card stat-card bg-dark shadow-sm border-primary text-center h-100">
         <div class="card-body">
-          <h5 class="card-title">Facultés</h5>
-          <p class="display-6 text-info">{{ stats.totalFaculties }}</p>
+          <h5 class="card-title text-light">Facultés</h5>
+          <p class="display-5 fw-bold text-primary">{{ stats.totalFaculties }}</p>
         </div>
       </div>
     </div>
 
     <div class="col-md-6">
-      <div class="card border-danger shadow-sm text-center">
+      <div class="card stat-card bg-dark shadow-sm border-danger text-center h-100">
         <div class="card-body">
-          <h5 class="card-title">Travaux Pratiques</h5>
-          <p class="display-6 text-danger">{{ stats.totalTPs }}</p>
+          <h5 class="card-title text-light">Travaux Pratiques</h5>
+          <p class="display-5 fw-bold text-danger">{{ stats.totalTPs }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-

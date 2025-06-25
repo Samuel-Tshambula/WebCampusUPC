@@ -1,23 +1,42 @@
-<!-- HERO -->
-<section class="hero d-flex align-items-center justify-content-center text-center text-light">
-  <div class="overlay"></div>
-  <div class="content animate__animated animate__fadeInDown">
-    <h1 class="display-4 fw-bold">Bienvenue sur Web Campus UPC</h1>
-    <p class="lead mt-3">
-      L’espace numérique des étudiants et de la faculté pour une meilleure communication académique.
-    </p>
-    <a routerLink="/auth/login" class="btn btn-warning btn-lg mt-4 shadow animate__animated animate__zoomIn animate__delay-1s">
-      Connexion
-    </a>
+<section class="hero-section d-flex align-items-center bg-white">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Animation Lottie à gauche -->
+      <div class="col-lg-6 mb-4 mb-lg-0 d-flex justify-content-center">
+        <ng-lottie
+          [options]="{ path: 'assets/animations/university.json' }"
+          class="hero-lottie"
+        ></ng-lottie>
+      </div>
+
+      <!-- Texte et bouton à droite -->
+      <div class="col-lg-6 text-center text-lg-start">
+        <h1 class="display-4 fw-bold text-dark">Bienvenue sur Web Campus UPC</h1>
+        <p class="lead text-secondary mb-4">
+          La plateforme numérique pour connecter étudiants, enseignants et faculté.
+        </p>
+        <a
+          routerLink="/auth/login"
+          class="btn btn-warning btn-lg px-5 py-3 shadow animate__animated animate__fadeInRight animate__delay-1s"
+        >
+          Connexion
+        </a>
+      </div>
+    </div>
   </div>
 </section>
 
+
 <!-- À PROPOS -->
-<section class="about-us py-5 bg-light text-center">
+<section class="about-us-section text-center py-5">
   <div class="container">
-    <h2 class="mb-4">À propos de Web Campus</h2>
+    <h2 class="fw-bold mb-4">À propos de Web Campus</h2>
+    <p class="lead text-muted mb-3">
+      Web Campus est une plateforme numérique moderne destinée à renforcer la communication académique.
+    </p>
     <p class="text-muted">
-      Web Campus est une plateforme moderne conçue pour connecter les étudiants, les enseignants et la faculté de l’UPC. Elle facilite l’accès aux documents, horaires, TP, et bien plus encore.
+      Elle connecte les étudiants, enseignants et facultés en facilitant l'accès aux TPs, documents, emplois du temps et délibérations,
+      tout en favorisant un environnement d'apprentissage efficace.
     </p>
   </div>
 </section>
@@ -87,7 +106,7 @@
       </div>
       <div class="col-md-4">
         <div class="card shadow h-100">
-          <img src="https://th.bing.com/th/id/OIP.ke0nCEVKTf1EZ9mKBbsP8QHaFJ?w=909&h=632&rs=1&pid=ImgDetMain" class="card-img-top" alt="info2">
+          <img src="https://www.archipel-evenement.com/wp-content/uploads/2023/07/Portes-ouvertes-1_0.jpeg" class="card-img-top" alt="info2">
           <div class="card-body">
             <h5 class="card-title">Nouveaux modules disponibles</h5>
             <p class="card-text">Les modules de TP pour les L3 et M1 sont désormais en ligne dans la section Valve.</p>

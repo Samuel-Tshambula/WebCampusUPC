@@ -1,0 +1,20 @@
+.reclamations-enseignant .card {
+  background-color: #fefefe;
+  transition: transform 0.2s ease-in-out;
+  border-radius: 1.2rem;
+}
+
+.reclamations-enseignant .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.06);
+}
+
+.reclamations-enseignant .btn-outline-primary {
+  border-radius: 50px;
+  font-size: 0.9rem;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  border-radius: 1rem;
+}

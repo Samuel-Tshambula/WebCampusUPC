@@ -1,10 +1,12 @@
 import { AuthService } from './../../core/services/auth.service';
 import { RouterLink } from '@angular/router';
 import { Component, AfterViewInit, inject } from '@angular/core';
+import { LottieComponent } from 'ngx-lottie';  // importer la directive standalone
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, LottieComponent],
+  standalone: true,
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

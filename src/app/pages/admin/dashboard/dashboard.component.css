@@ -1,0 +1,19 @@
+.stat-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-left: 4px solid transparent;
+  border-radius: 12px;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 12px rgba(0, 123, 255, 0.2);
+}
+
+.stat-card .card-title {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.stat-card p {
+  margin: 0;
+}

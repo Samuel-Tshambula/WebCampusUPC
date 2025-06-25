@@ -1,0 +1,23 @@
+.card {
+  border-radius: 1.2rem;
+  background-color: #ffffff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f3f5;
+}
+
+h2, h5 {
+  line-height: 1.4;
+}

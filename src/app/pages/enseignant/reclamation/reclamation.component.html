@@ -1,34 +1,35 @@
-<div class="container mt-5 pt-4">
-  <h3 class="mb-4 text-center">Réclamations des étudiants</h3>
+<div class="container mt-5 pt-5 reclamations-enseignant">
+  <h3 class="mb-4 text-center fw-bold text-dark">📬 Réclamations des étudiants</h3>
 
-  <div *ngIf="reclamationsFiltrees.length === 0" class="alert alert-info text-center">
+  <div *ngIf="reclamationsFiltrees.length === 0" class="alert alert-warning text-center shadow-sm">
     Aucune réclamation ne vous est destinée.
   </div>
 
   <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col" *ngFor="let rec of reclamationsFiltrees">
-      <div class="card shadow-sm h-100">
+      <div class="card h-100 border-0 shadow-sm rounded-4">
         <div class="card-body">
-          <h5 class="card-title">{{ rec.subject }}</h5>
-          <p class="card-text">
+          <h5 class="card-title text-primary fw-semibold">{{ rec.subject }}</h5>
+          <p class="card-text text-muted mb-2">
             <strong>Type :</strong> {{ rec.type }} <br />
             <strong>Étudiant :</strong> {{ rec.student.fullName }} <br />
             <strong>Promotion :</strong> {{ rec.student.promotion.nom }} - {{ rec.student.promotion.section.name }} <br />
             <strong>Date :</strong> {{ rec.createdAt | date:'dd/MM/yyyy HH:mm' }}
           </p>
-          <button class="btn btn-outline-primary btn-sm" (click)="ouvrirDetails(rec)">Voir détails</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Modal détails -->
-  <div *ngIf="reclamationSelectionnee" class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.6);">
-    <div class="modal-dialog">
-      <div class="modal-content shadow">
-        <div class="modal-header">
-          <h5 class="modal-title">{{ reclamationSelectionnee.subject }}</h5>
-
+  <div *ngIf="reclamationSelectionnee" class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0, 0, 0, 0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 rounded-4 shadow-lg">
+        <div class="modal-header bg-light border-bottom-0">
+          <h5 class="modal-title text-primary fw-bold">{{ reclamationSelectionnee.subject }}</h5>
+          <button type="button" class="btn-close" (click)="fermerDetails()"></button>
+        </div>
+        <div class="modal-body text-dark">
           <p><strong>Type :</strong> {{ reclamationSelectionnee.type }}</p>
           <p><strong>Message :</strong> {{ reclamationSelectionnee.message }}</p>
           <p><strong>Étudiant :</strong> {{ reclamationSelectionnee.student.fullName }}</p>
@@ -37,7 +38,8 @@
             {{ reclamationSelectionnee.student.promotion.section.name }}
           </p>
           <p><strong>Date :</strong> {{ reclamationSelectionnee.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
-        <div class="modal-footer">
+        </div>
+        <div class="modal-footer border-top-0">
           <button class="btn btn-secondary" (click)="fermerDetails()">Fermer</button>
         </div>
       </div>
